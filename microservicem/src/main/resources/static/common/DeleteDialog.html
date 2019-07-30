@@ -1,0 +1,16 @@
+    <div class="ngdialog-header center">
+		<p>{{'msg'|translate}}</p>
+	</div>
+	<div class="ngdialog-message center">
+	   <p class="bigger-110 bolder center grey btn-fsw-mes">{{'areyousure'|translate}}</p>
+	   <p class="bolder center grey btn-fsw-mes">
+			{{'areyourevoke'|translate}}
+			<input type="checkbox" class="radio-ava"  ng-model="isRevoke" >
+		</p>
+	</div>
+	<div class="ngdialog-buttons center">
+		<button type="button" class="btn btn-xs bigger-110 btn-fsw-ok" ng-click="confirm(isRevoke)">
+		<img src='img/btn_icon_ok.png'></img>{{'ok'|translate}}</button>
+		<button type="button" class="btn btn-fsw-cancel btn-xs bigger-110" ng-click="closeThisDialog('Cancel')">
+		<img src="img/btn_icon_cancel.png"></img>{{'cancel'|translate}}</button>
+	</div>

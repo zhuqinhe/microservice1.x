@@ -1,0 +1,30 @@
+<div style="height:35px" class="ngFooterPanel">
+    <div class="ngTotalSelectContainer">
+        <div class="ngFooterTotalItems">
+            <span>{{"total"|translate}}:
+				{{total}} </span>
+        </div>
+    </div>
+    <div class="ngPagerContainer" style="float: right; margin-top: 3px;">
+        <div class="ngRowCountPicker" style="float: left; margin-right: 10px;">
+            <span class="pull-left" style="margin-top: 4px;">{{"pageSize"|translate}}:
+			</span>
+            <select ng-model="max" style="height: 25px; min-width: 45px" ng-change="changePageSize()">
+                <option ng-repeat=" size in pageSizes " value="{{size}}" ng-selected="max == size">{{size}}</option>
+            </select>
+            
+        </div>
+        <div class=" pull-left" style="margin-right: 10px;">
+            <button title="First Page" ng-disabled="first == 0" ng-click="pageToFirst()" class="ngPagerButton btn-page" type="button" disabled="disabled" style="background-image: url(img/pageCtrl/icon_2.png)"></button>
+            <button title="Previous Page" ng-disabled="first < max" ng-click="pageBackward()" class="ngPagerButton btn-page" type="button" disabled="disabled" style="background-image: url(img/pageCtrl/icon_1.png);"></button>
+            <!-- <input ng-model="currentPage" ng-change="changeCurrentPage()" ng-show="editMode" ng-blur="editMode = false" style="height: 20px; width: 40px; vertical-align: top; margin-top: 3px; text-align: center" class="ngPagerCurrent ng-pristine ng-valid ng-valid-number ng-valid-min"> -->
+            <input ng-model="currentPage" ng-change="changeCurrentPage()" style="height: 20px; width: 40px; vertical-align: top; margin-top: 3px; text-align: center" class="ngPagerCurrent ng-pristine ng-valid ng-valid-number ng-valid-min">
+            <span  class="maxPages" style="margin-bottom: 0px; padding-right: 4px" ng-show="total!=0">
+				/{{total/max|ceil}} </span>
+            <button title="Next Page" ng-disabled="cantPageForward()" ng-click="pageForward()" class="ngPagerButton btn-page" type="button" style="background-image: url(img/pageCtrl/icon_1_next.png);">
+			</button>
+            <button title="Last Page" ng-disabled="cantPageForward()" ng-click="pageToLast()" class="ngPagerButton btn-page" type="button" style="background-image: url(img/pageCtrl/icon_2_next.png);">
+			</button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,6 @@
+<select>
+        <option value="" ng-if="needAll">{{'all'|translate}}</option>
+        <option ng-repeat="c in configs" value="{{c.value}}" ng-selected="ngModel == c.value" >
+            {{c.label|translate}}
+        </option>
+</select>

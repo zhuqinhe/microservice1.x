@@ -1,0 +1,43 @@
+@CHARSET "UTF-8";
+@font-face {
+	font-family: "Walkway";
+	src: url("Walkway SemiBold.ttf");
+	font-weight: normal;
+	font-style: normal;
+}
+
+.no-pri-error {
+	margin-top: 10%;
+}
+.no-pri-error p {
+	font-family: Walkway;
+	font-size: 25px;
+	color: #c1c1c1;
+	margin-top: 40px;
+	margin-left: -20px;
+}
+.btn-opt a:active {
+	box-shadow: none;
+}
+.btn-opt a:hover, .btn-opt a:focus {
+	color: #e6e6e6;
+	border-color: #e4e4e4;
+}
+.btn-opt a:active,
+.btn-to-last-page,
+.btn-go-index {
+	padding-left: 20px;
+	color: #c1c1c1;
+	border: 1px solid #f4f4f4;
+}
+.btn-to-last-page:active,
+.btn-to-last-page {
+	background: url(../img/tool/icon_retract2.png) no-repeat;
+	background-position: 0 40%;
+	margin: 0 25px 0 -65px;
+}
+.btn-go-index:active,
+.btn-go-index {
+	background: url(../img/tool/icon_home.png) no-repeat;
+	background-position: 0 40%;
+}

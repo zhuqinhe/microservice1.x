@@ -1,0 +1,40 @@
+<div class="row">
+		<div class="col-sm-12">
+			<div class="widget-box"
+				style="border-bottom-width: 0px; margin-bottom: 0px;">
+				<div class="widget-header">
+					<h4>{{'selectCategory'|translate}}</h4>
+					<div class="widget-toolbar">
+						<a href="" ng-click="cancelCategoryDlg()"> <img
+							src="img/btn_x.png"></img>
+						</a>
+					</div>
+				</div>
+
+				<div class="widget-body">
+					<div class="widget-main"
+						style="max-height: 300px; overflow-y: auto; overflow-x: hidden;"
+						id="catescroll">
+						<div class="row">
+							<div class="col-sm-12">
+								<div id="categorydlg">
+									<span id="categoryTree"></span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div align="center" class="row" style="margin-bottom: 10px">
+						<button class="btn btn-info btn-success btn-fsw-ok" type="button"
+							ng-click="closeCategoryDlg()">
+							<img src="img/btn_icon_ok.png"></img> {{'ok'|translate}}
+						</button>
+						<a ng-click="cancelCategoryDlg()"
+							class="btn btn-info btn-fsw-cancel"
+							style="background-color: #ccc !important"> <img
+							src="img/btn_icon_cancel.png"></img> {{'cancel'|translate}}
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>

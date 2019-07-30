@@ -1,0 +1,39 @@
+server:
+  port: 6400
+spring: 
+  cloud:
+    config:
+      profile: dev 
+      label: master
+      discovery:
+        enabled: true
+        service-id:  config-server
+  application: 
+    name: search
+  rabbitmq: 
+    host: localhost
+    port: 5672
+    username: hoob
+    password: zhuqinhe
+logging:
+  level:
+    root: INFO
+    com.test: DEBUG
+eureka:
+  client:
+    #healthcheck:
+    #  enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 10 #eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）默认30 ，生成环境不建议修改
+hystrix.command.default.execution.isolation.thread.timeoutInMilliseconds: 5000
+feign: 
+  hystrix:
+    enabled: true
+management:                  
+  security:
+    enabled: false
+    

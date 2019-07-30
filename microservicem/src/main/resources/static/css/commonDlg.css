@@ -1,0 +1,24 @@
+@CHARSET "UTF-8";
+.ngdialog-content {
+	padding: 0 !important;
+	border-radius: 0px !important;
+}
+.ngdialog-header {
+  height: 45px;
+  line-height: 45px;
+  color: #5b6062;
+  font-size: 20px;
+  background-color: #ddd;
+}
+.ngdialog-message {
+	min-height: 50px;
+}
+.ngdialog-buttons {
+	padding: 10px 0;
+}
+.ngdialog-buttons button {
+  padding: .2em 1em;
+}
+.radio-ava:focus {
+	outline: none !important;
+}

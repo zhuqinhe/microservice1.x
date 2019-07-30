@@ -1,0 +1,262 @@
+<style type="text/css">
+.file-box {
+	position: relative;
+	width: 340px
+}
+
+.file {
+	position: absolute;
+	top: 0;
+	right: 80px;
+	height: 30px;
+	filter: alpha(opacity : 0);
+	opacity: 0;
+	width: 260px
+}
+
+.div_overlay {
+	display: none;
+	position: fixed;
+	top: 0%;
+	left: 0%;
+	width: 100%;
+	height: 100%;
+	background-color: black;
+	z-index: 1010;
+	-moz-opacity: 0.8;
+	opacity: .80;
+	filter: alpha(opacity = 80);
+}
+
+.div_content {
+	display: none;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	width: 280px;
+	margin-left: -140px;
+	height: 80px;
+	margin-top: -80px;
+	padding: 0;
+	_position: absolute;
+	z-index: 1011;
+	overflow: hidden;
+}
+</style>
+<!-- border: 12px solid #3777BC;
+            background-color: #F0F5F8;
+             -->
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+
+	<ul class="breadcrumb">
+		<li ng-if="type==0"><a href="#/program/list/0">{{'movie'|translate}}</a>
+		</li>
+		<li ng-if="type==1"><a href="#/tvshow/list/0/null">{{'tvshows'|translate}}</a>
+		</li>
+		<li ng-if="type==2"><a href="#/album/list/0/0">{{'music'|translate}}</a>
+		</li>
+		<li ng-if="type==3"><a href="#/album/list/0/1">{{'kalaok'|translate}}</a>
+		</li>
+		<li ng-if="type==4"><a href="#/app/list/0/APP">{{'app'|translate}}</a>
+		</li>
+		<li ng-if="type==5"><a href="#/app/list/0/GAME">{{'game'|translate}}</a>
+		</li>
+		<li ng-if="type==11"><a href="#/uitemplate/list/0">{{'epghomepagemodule'|translate}}</a>
+		</li>
+		<li ng-if="type==12"><a href="#/template/list/0">{{'template'|translate}}</a>
+		</li>
+		<li class="active">{{'cmsImport'|translate}}</li>
+	</ul>
+</div>
+<!-- .breadcrumb -->
+
+<!--copy success tip-->
+<!-- 	{{'contentImportSuccess'|translate}} -->
+<div class="col-sm-6">
+	<div id="dialog-tip" class="hide">
+		<p class="bigger-110 bolder center grey">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'successCount'|translate}}: <i class=" green bigger-120">{{successCount}}</i>
+			&nbsp; {{'failCount'|translate}}: <i class=" red bigger-120">{{failcount}}</i>
+			&nbsp;
+		</p>
+	</div>
+</div>
+<!--copy success tip-->
+<div class="col-sm-6">
+	<div id="dialog-tip2" class="hide">
+		<p class="bigger-110 bolder center grey">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'errorMsg'|translate}}
+		</p>
+	</div>
+</div>
+
+<div class="col-sm-6">
+	<div id="dialog-uitemplate-msg" class="hide">
+		<p class="bigger-110 bolder center grey">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'uitemplatenameexit'|translate}}
+		</p>
+	</div>
+</div>
+
+<!-- process bar -->
+<div id="lightshow" class="div_content">
+	<div class="progress progress-striped active">
+		<div class="progress-bar progress-bar-blue" style="width: 100%"></div>
+	</div>
+</div>
+<div id="fadeshow" class="div_overlay"></div>
+<!--  <div class="div_content">
+<div id="dialog-con" class="ui-widget-overlay ui-front">
+	<div class="widget-box"
+			style="border-bottom-width: 0px; margin-bottom: 0px;">
+		<div class="widget-body">
+			<div class="widget-main">
+				<span>{{'msg'|translate}}</span>
+				<br />
+				<div align="center" class="row">
+					<li>{{'msginfo'|translate}}</li>
+					<div class="clearfix form-actions">
+						<div class="col-md-offset-4 col-md-9" center>
+							&nbsp; &nbsp; &nbsp;
+							<a class="btn btn-info center"
+									type="button" href="#/program/list/0}">
+								<i
+									class="icon-undo bigger-110"></i>
+								{{'return'|translate}}
+							</a>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</div>
+-->
+<!--browse file-->
+<div id="selectFileDlg" class="ui-widget-overlay ui-front">
+	<div id="dialog-browserfile"
+		class="row ui-dialog ui-widget ui-widget-content ui-corner-all ui-front ui-dialog-buttons ui-draggable ui-resizable widget-box"
+		style="position: absolute; top: 20px; width: 800px; left: 300px; display: block;">
+		<div class="widget-box"
+			style="border-bottom-width: 0px; margin-bottom: 0px;">
+			<div class="widget-header">
+				<h4>{{'selectFile'|translate}}</h4>
+				<div class="widget-toolbar">
+					<a href="" ng-click="cancelFile()"> <i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+
+			<div class="widget-body">
+				<div class="widget-main">
+					<tabset>
+					</tab> <tab> <tab-heading>{{'uploadFromLocal'|translate}}</tab-heading>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="form-group">
+								<!-- <span ng-show="addFlag">
+								*-->
+								<label class="col-sm-1 control-label no-padding-right">xml:</label>
+								<div class="col-sm-7">
+									<input type="text" name="txtname" ng-model="txtname"
+										class="form-control input-search" />
+								</div>
+								<div class="col-sm-4">
+									<div class="file-box">
+										<input type="file" ng-file-select="onFileSelect($files)"
+											style="display: none" id="txtupload"> <input
+											type='button' class='btn btn-info btn-sm'
+											value="{{'addFile'|translate}}" id="txtuploadbtn"
+											onclick="uploadFileClick(this)" />
+									</div>
+								</div>
+
+							</div>
+						</div>
+					</div>
+					<br />
+					<div align="center" class="row">
+						<button class="btn btn-info" type="button" ng-click="uploadXml()"
+							ng-disabled="txtname==''">
+							<i class="icon-ok"></i> {{'ok'|translate}}
+						</button>
+						<button class="btn btn-info" type="button" ng-click="cancelFile()">
+							<i class="icon-undo"></i> {{'cancel'|translate}}
+						</button>
+					</div>
+					</tab> </tabset>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div class="page-content">
+
+	<!-- /.page-header -->
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div class="form-horizontal" role="form" name="txtinfoForm">
+
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">
+						{{'txtPath'|translate}} <span ng-show="addFlag"><font
+							color="red">*</font></span> :
+					</label>
+					<div class="col-sm-4">
+						<input type="text" name="url" ng-model="url"
+							class="form-control input-search" />
+					</div>
+					<div class="col-sm-4">
+						<button class="btn btn-info" ng-click="openFileDlg()">{{'select'|translate}}</button>
+					</div>
+				</div>
+
+				<div class="clearfix form-actions fsw-form-actions">
+					<div style="text-align: center;">
+						<button class="btn btn-success btn-tool btn-fon" type="button"
+							ng-click="uploadContentXml()">
+							<i class="icon-ok bigger-110"></i> {{'submit'|translate}}
+						</button>
+						&nbsp; &nbsp; &nbsp; <a class="btn btn-default btn-tool btn-fon"
+							type="button" href="javascript:void(0)"
+							ng-click="cancelUploadFile()"> <i
+							class="icon-undo bigger-110"></i> {{'cancel'|translate}}
+						</a>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+    var enableClick = true;
+    var time;  
+    function uploadFileClick(obj) {
+        if(enableClick) {
+            enableClick = false;
+            time = window.setTimeout(function(){enableClick = true;},1000);
+        }
+        else {
+            window.clearTimeout(time);
+            time = window.setTimeout(function(){enableClick = true;},1000);
+            return false
+        }
+        var self = obj;
+        var id = self.id;
+        console.log(">>>>>obj id is:" + self.id);
+        $("#" + id).parent().children("input[type='file']").click();
+    }
+</script>

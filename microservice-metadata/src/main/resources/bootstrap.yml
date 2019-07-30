@@ -1,0 +1,50 @@
+server:
+  port: 6600
+spring: 
+  cloud:
+    config:
+      profile: dev 
+      label: master
+      discovery:
+        enabled: true
+        service-id:  config-server
+  application:
+    name: metadata
+  rabbitmq: 
+    host: localhost
+    port: 5672
+    username: hoob
+    password: zhuqinhe
+  datasource: 
+    url: jdbc:mysql://172.16.0.36:3306/epgdb_v3r3_new?useUnicode=true&characterEncoding=UTF-8
+    username: appuser
+    password: Mysql123+
+    driver-class-name: com.mysql.jdbc.Driver
+    max-idle: 10
+    max-wait: 10000
+    min-idle: 5
+    initial-size: 5
+logging:
+  level:
+    root: INFO
+    com.test: DEBUG
+eureka:
+  client:
+   # healthcheck:
+   #   enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 10 #eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）默认30 ，生成环境不建议修改
+sync: 
+  config:
+    cmsversion: 300
+    default_language: zh_CN
+    picture_url_prefix: http://172.16.16.40:8080/media/
+    picture_url_prefix_old: 172.16.16.27
+    picture_url_prefix_new: 172.16.16.40
+management:                  
+  security:
+    enabled: false

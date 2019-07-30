@@ -1,0 +1,161 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+
+	<ul class="breadcrumb">
+		<li><a href="#/security/user/list/0">{{'user'|translate}}</a></li>
+		<li class="active">{{'addEdit'|translate}}</li>
+	</ul>
+</div>
+<!-- .breadcrumb -->
+
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" name="add_form" novalidate>
+				<div class="form-group" ng-if="data.role=='sp'">
+					<label class="col-sm-4 control-label no-padding-right">{{'sp'|translate}}<font
+						color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+						<select class="form-control input-search" ng-change="getCpsBySp(data.spId)"
+							style="padding-top: 2px;" ng-model="data.spId" required>
+							<option ng-repeat="c in sps" value={{c.spId}}
+								ng-selected="c.spId==data.spId">{{c.name}}</option>
+						</select>
+					</div>
+				</div>
+				<!-- 用户类型 -->
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'userType'|translate}}<font
+						color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+						<select ng-model="data.userType" class="from-control input-search"
+							style="padding-top: 2px;">
+							<option value="admin">{{'admin'|translate}}</option>
+							<option value="user">{{'user'|translate}}</option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'loginname'|translate}}<font
+						color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+						<input type="text" name="name" ng-model="data.userId" ng-change="checkUserId()"
+							maxlength="50" class="form-control input-search"
+							ng-disabled="data.role=='admin'" required />
+					</div>
+					<div class="col-sm-4 error" style="color: red" ng-show="repeatName">
+                        <small class="error"> {{'nameexists'|translate}} </small>
+                    </div>
+				</div>
+
+				<!-- 昵称 -->
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'nickname'|translate}}:</label>
+					<div class="col-sm-4">
+						<input type="text" name="nickName" ng-model="data.nickName"
+							maxlength="50" class="form-control input-search" />
+					</div>
+				</div>
+
+				<!-- 所属机构 -->
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'organization'|translate}}:</label>
+					<div class="col-sm-4">
+						<input type="text" name="organization"
+							ng-model="data.organization" maxlength="255"
+							class="form-control input-search" />
+					</div>
+				</div>
+
+				<!-- 是否启用IP绑定 -->
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'enableIpBinding'|translate}}<font
+						color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+<!-- 						<select ng-model="data.enableIPBinding" -->
+<!-- 							class="from-control input-search" style="padding-top: 2px;"> -->
+<!-- 							<option value='true'>{{'yes'|translate}}</option> -->
+<!-- 							<option value='false'>{{'no'|translate}}</option> -->
+<!-- 						</select> -->
+						<label> <input name="switch-field-1"
+                            ng-model="data.enableIPBinding" class="ace ace-switch ace-switch-5"
+                            type="checkbox" /> <span class="lbl"></span>
+                        </label>
+					</div>
+				</div>
+				<!-- IP绑定 -->
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'IPBinding'|translate}}:</label>
+					<div class="col-sm-4">
+						<textarea class="form-control limited textarea-add"
+							id="form-field-9" rows="3" maxlength="1000"
+							ng-model="data.ipAddr" style="height: 100% !important"  onkeyup="javascript:this.value=this.value.replace(/，/ig,',');"></textarea>
+						<div class="text-left">{{'noticeOfIPAddress'|translate}}</div>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'enable'|translate}}<font
+						color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+<!-- 						<select ng-model="data.enable" class="from-control input-search" -->
+<!-- 							style="padding-top: 2px;"> -->
+<!-- 							<option value="true">{{'yes'|translate}}</option> -->
+<!-- 							<option value="false">{{'no'|translate}}</option> -->
+<!-- 						</select> -->
+						<label> <input name="switch-field-1"
+                            ng-model="data.enable" class="ace ace-switch ace-switch-5"
+                            type="checkbox" /> <span class="lbl"></span>
+                        </label>
+					</div>
+				</div>
+
+			<!-- 	<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'usergroup'|translate}}:</label>
+					<div class="col-sm-4">
+						<div class="checkbox" ng-repeat="g in groups">
+							<label> <input name="form-field-checkbox" type="checkbox"
+								ng-model="g.checked" class="ace" /> <span style="z-index: 1"
+								class="lbl">{{g.name}}</span>
+							</label>
+						</div>
+					</div>
+				</div> -->
+				<!-- <div class="form-group" ng-if="id!=0">
+					<label class="col-sm-4 control-label no-padding-right">{{'resetPassword'|translate}}:</label>
+					<div class="col-sm-4">
+						<label> <input name="switch-field-1"
+							ng-model="data.pwFlag" class="ace ace-switch ace-switch-5"
+							type="checkbox" /> <span class="lbl"></span>
+						</label>
+					</div>
+				</div>
+ -->
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-4 col-md-9">
+						<button class="btn btn-default btn-tool btn-fon btn-success"
+							type="button" ng-click="saveItem()"
+							ng-disabled="add_form.$invalid||repeatName">
+							<i class="icon-ok bigger-110"></i> {{'submit'|translate}}
+						</button>
+						&nbsp; &nbsp; &nbsp; <a class="btn btn-default btn-tool btn-fon"
+							href="#/security/user/list/1"> <i class="icon-undo bigger-110"></i>
+							{{'cancel'|translate}}
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

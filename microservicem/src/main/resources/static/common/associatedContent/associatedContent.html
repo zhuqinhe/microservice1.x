@@ -1,0 +1,119 @@
+<!-- 绑定动作 -->
+<div class="form-group">
+	<label id = "action" class="{{label_col}} control-label no-padding-right">{{'bindingAction'|translate}}:</label>
+	<div class="{{label_input}}">
+		<select class="pageaction input-search" ng-model="data.action" style="width: 100%" ng-change="changeAction()">
+			<option ng-repeat="i in actions" value="{{i.name}}" ng-selected="data.action==i.name">{{i.value|translate}}</option>
+		</select>
+	</div>
+</div>
+<!-- 关联内容 -->
+<div class="form-group" ng-show="contentTypes.length> 0">
+	<!--  -->
+	<label class="{{label_col}} control-label no-padding-right">{{'releateContentType'|translate}}:</label>
+	<div class="{{label_input}}">
+		<select class = "input-search" ng-model="data.re_contentType" style="width: 100%" ng-change="showName()">
+			<!-- 值由action确定 -->
+			<option ng-repeat="t in contentTypes" value="{{data.re_contentType}}" ng-selected="t.key==data.re_contentType">{{t.value|translate}}</option>
+		</select>
+	</div>
+	<div class="{{label_col}}" ng-show="data.re_contentType==1||data.re_contentType==8||data.re_contentType==2||data.re_contentType==10||data.re_contentType==12||data.re_contentType==13||data.re_contentType==15||data.re_contentType==4||data.re_contentType==17||data.re_contentType==18">
+		<a ng-click="openContentDlg(data.re_contentType,0)" class="btn btn-sm btn-info"> <i class=" icon-plus bigger-120"></i>
+			{{'selectContent'|translate}}
+		</a>
+		<!-- 打开回看播放器 只有选择了频道才能选择节目单 -->
+		<a ng-click="openContentDlg(data.contentType,1)" ng-show="data.action==206 " class="btn btn-sm btn-info">
+			<i class=" icon-circle-blank bigger-100"></i>
+			{{'selectScheduleRecord'|translate}}
+		</a>
+	</div>
+
+</div>
+<div class="form-group" ng-show="contentTypes.length> 0 &&data.re_contentType!=5">
+	<label class="{{label_col}} control-label no-padding-right" ng-if="data.re_contentType!=6">{{'re_id'|translate}}:</label>
+	<label class="{{label_col}} control-label no-padding-right" ng-if="data.re_contentType==6">{{'url'|translate}}:</label>
+	<div class="{{label_input}}">
+		<!-- ng-model="addOptions.id" -->
+		<input type="text" name="re_id" ng-model="data.re_content" maxlength="255" class="form-control input-search" />
+	</div>
+</div>
+<div class="form-group" ng-show="contentTypes.length> 0 && data.re_contentType!=5&&data.re_contentType!=6">
+	<label class="{{label_col}} control-label no-padding-right">{{'re_name'|translate}}:</label>
+	<div class="{{label_input}}">
+		<!-- ng-model="addOptions.name" -->
+		<input type="text" name="name" ng-model="data.re_contentName" maxlength="255" class="form-control input-search" />
+	</div>
+</div>
+<!-- app类型才显示 -->
+<div class="form-group" ng-show="contentTypes.length> 0 && data.re_contentType==5">
+	<label class="{{label_col}} control-label no-padding-right">&nbsp;&nbsp;&nbsp;&nbsp;{{'packageName'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" name="packageName" ng-model="data.re_packageName" maxlength="255" class="form-control input-search" />
+	</div>
+</div>
+<!-- 点播类型才显示 -->
+<!-- <div class="form-group" ng-show="contentTypes.length> 0 && data.re_contentType==2">
+	<label class="{{label_col}} control-label no-padding-right">&nbsp;&nbsp;&nbsp;&nbsp;{{'vodtype'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" name="programType" ng-model="programType" maxlength="255" class="form-control input-search" />
+	</div>
+</div> -->
+<div class="form-group" ng-show="contentTypes.length> 0 && data.re_contentType==5">
+	<label class="{{label_col}} control-label no-padding-right">&nbsp;&nbsp;&nbsp;&nbsp;{{'class'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" name="class" ng-model="data.re_className" maxlength="255" class="form-control input-search" />
+	</div>
+</div>
+
+<div class="form-group" ng-show="contentTypes.length> 0 && (data.re_contentType==5||data.re_contentType==13||data.re_contentType==2)">
+	<label class="{{label_col}} control-label no-padding-right">&nbsp;&nbsp;&nbsp;&nbsp;{{'parameters'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" name="parameters" ng-model="data.re_params" maxlength="255" class="form-control input-search" />
+	</div>
+</div>
+
+<!-- 打开回看播放器才显示 -->
+<div class="form-group" ng-show="data.action==206">
+	<label class="{{label_col}} control-label no-padding-right">{{'programname'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" ng-model="scheduleName" class="form-control" class="form-control input-search input-search" disabled/>
+	</div>
+</div>
+
+<div class="form-group" ng-show="data.action==206">
+	<label class="{{label_col}} control-label no-padding-right">{{'date'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" ng-model="date" class="form-control datepicker" class="form-control input-search input-search" disabled/>
+	</div>
+</div>
+
+<div class="form-group" ng-show="data.action==206">
+	<label class="{{label_col}} control-label no-padding-right">{{'startTime'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input class="form-control timepickerHms input-search" name="startTime" ng-model="startTime" ng-pattern="/^(([0-1][0-9])|2[0-3]):[0-5][0-9]:[0-5][0-9]$/" disabled/>
+	</div>
+</div>
+
+<div class="form-group" ng-show="data.action==206">
+	<label class="{{label_col}} control-label no-padding-right">{{'endTime'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input class="form-control timepickerHms input-search" name="endTime" ng-pattern="/^((([0-1][0-9])|2[0-3]):[0-5][0-9]:[0-5][0-9])|(24:00:00)$/" ng-model="endTime" disabled/>
+	</div>
+</div>
+
+<!-- 增加样式 -->
+<div class="form-group" ng-show="data.re_contentType!=15&&data.re_contentType!=100&&data.re_contentType!=6&&data.re_contentType!=1">
+	<label class="{{label_col}} control-label no-padding-right">{{'style'|translate}}:</label>
+	<div class="{{label_input}}">
+		<select class = "input-search" ng-model="data.style" style="width: 100%">
+			<option value="">{{'none'|translate}}</option>
+			<option ng-repeat="i in catstyles" ng-selected="i.code == data.style" value="{{i.code}}">{{i.name}}</option>
+		</select>
+	</div>
+</div>
+<div class="form-group" ng-show="data.re_contentType==15">
+	<label class="{{label_col}} control-label no-padding-right">{{'style'|translate}}:</label>
+	<div class="{{label_input}}">
+		<input type="text" ng-model="data.style" class="form-control datepicker input-search" class="form-control input-search" disabled/>
+	</div>
+</div>

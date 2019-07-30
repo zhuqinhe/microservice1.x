@@ -1,0 +1,4 @@
+<select>
+    <option value="" ng-if="needAll">{{'all'|translate}}</option>
+    <option ng-repeat="cp in cps" value={{cp.cpId}}>{{cp.name|translate}}</option>
+</select>

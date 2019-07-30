@@ -1,0 +1,112 @@
+<div class="breadcrumbs" id="breadcrumbs">
+    <script type="text/javascript">try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}</script>
+
+    <ul class="breadcrumb">
+        <li>
+            <a href="#/favorite/list/0">{{'favorite'|translate}}</a>
+        </li>
+        <li class="active">{{'list'|translate}}</li>
+    </ul>
+</div>
+<div class="page-content">
+    <div class="space-6"></div>
+    <form class="form-inline">
+        <div style="padding-left: 29px;">
+            <span class="input-filter">
+                <label>{{'userId'|translate}} :</label>
+                <input type="text" class="input-medium input-search" ng-model="queryOptions.id"/>
+            </span>
+            <span  style="margin-left: 61px;">
+                <button type="button" class="btn btn-default btn-tool btn-fon ico-search" ng-click="search()" id="search">{{'search'|translate}}</button>
+                <button type="button" class="btn btn-default btn-tool btn-fon ico-reset" ng-click="reset()">{{'reset'|translate}}</button>
+              
+            </span>
+        </div>
+    </form>
+    <div class="hr hr-dotted hr18"></div>
+    
+    <!--增加回收站功能,逻辑删除把任务删除到回收站，物理删除是从回收站中删除任务-->
+    <div class="row">
+        <div class="col-xs-12">
+        	<ul class="nav nav-tabs"
+				ng-class="{'nav-stacked': vertical, 'nav-justified': justified}">
+				<li ng-class="'active'" class="ng-isolate-scope">
+				<a href="javaScript:void(0);" class="ng-binding"
+					style="background: url(img/tool/icon_folder.png) no-repeat;"> <tab-heading
+							class="ng-binding ng-scope"> {{'lists'|translate}}
+						<span ng-if="castTabFlag">({{pagingOptions.total}})</span> </tab-heading>
+				</a>
+				</li>
+			</ul>
+            <!--Body content-->
+            <div class="table-responsive">
+                <table style="margin-bottom: 0px;text-align:center;table-layout:fixed;"
+                   class="table table-striped table-bordered table-hover" colresizeable>
+                    <thead>
+                        <tr>
+                            <th style="width: 5%;">
+								<label ng-click="selectAll()">
+									<input type="checkbox" class="ace" ng-model="checkAll" />
+									<span class="lbl"></span>
+								</label>
+							</th>
+                            <th style="width: 15%;">{{'ID'|translate}}</th>
+                            <th style="width: 10%;">{{'userId'|translate}}</th>
+                            <th style="width: 15%;">{{'codeID'|translate}}</th>
+                            <th style="width: 15%;">{{'name'|translate}}</th>
+                            <th style="width: 10%;">{{'updateTime'|translate}}</th>
+                          
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr  ng-repeat="item in  items" ng-click="selectRow(item)" style="text-align:center; ">
+                            <td><input type="checkbox" class="ace" ng-model="item.checked" ng-change="item.checked=!item.checked" />
+                                <span class="lbl"></span>
+                            </td>
+                            <td ng-click="savePageOptions()">
+                            <a class="blue"  ng-mouseleave="item.showmessage=false" ng-mouseover="item.showmessage=true">{{item.id}}</a>
+
+                                <div style="width: 520px; height: 180px; position: absolute; z-index: 99; background-color: white; text-align: left !important; box-shadow: 0 0 0 1px #aaa, 0 0 3px 4px #ddd;" ng-show="item.showmessage">
+                                    <div class="col-xs-3 no-padding">
+                                        <img alt="" ng-src="{{item.thumbnailUrl}}" width="126" height="180">
+                                    </div>
+                                    <div class="col-xs-9">
+                                        <div class="row col-xs-10 no-padding-left" style="padding-top: 10px; overflow: hidden; text-overflow: ellipsis;">
+                                            <strong class="blue" style="font-size: 17px;">{{item.name}}</strong>
+                                        </div>
+                                        <div class="row col-xs-10 no-padding-left" style="padding-top: 3px; overflow: hidden; text-overflow: ellipsis;">
+											<span class="text-muted"> <strong style="color: black !important;">{{'codeID'|translate}}:</strong>
+                                                &nbsp;<span ng-bind="item.contentId"></span>
+											</span>
+                                        </div>
+                                      
+                                        <div class="row col-xs-10 no-padding-left" style="padding-top: 3px; overflow: hidden; text-overflow: ellipsis;">
+											<span class="text-muted"> <strong style="color: black !important;">{{'userId'|translate}}:</strong>
+												&nbsp;{{item.userId|translate}}
+											</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td title={{item.userId}}>{{item.userId}}</td>
+                            <td title={{item.contentId}}>{{item.contentId}}</td>
+                            <td title={{item.name}}>{{item.name}}</td>
+                            <td title={{item.updateTime}}>{{item.updateTime}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div ng-grid-footer="" class="ng-scope">
+				<at-pagination></at-pagination>
+                <div class="btn-group"  ng-if="rootPris=='sysadmin'||rootPris=='admin'">
+                    <button type="button" class="btn btn-default btn-tool" style="background-image: url(img/tool/icon_delete.png);" ng-click="dodelete(0)"
+                    ng-disabled="!hasCheckedItem()" >{{'delete'|translate}}</button>
+                     <button type="button" class="btn btn-default btn-tool" style="background-image: url(img/tool/icon_return.png);" 
+                    ng-if="showreturn" ng-click="doreturn()">{{'return'|translate}}</button>
+					
+            </div>
+        </div>
+    </div>
+</div>
+</div>

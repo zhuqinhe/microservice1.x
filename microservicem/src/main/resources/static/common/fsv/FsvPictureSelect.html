@@ -1,0 +1,17 @@
+<div>
+
+<div class=" center pull-left" 
+style="margin-right:11px;{{($index%3 == 0 && $index != 0)?'clear:left;':'' }}" 
+ng-repeat="pic in pictureConfigs" >
+<img  width="100px" height="100px" 
+ng-src="{{ngModel[$index]==''||ngModel[$index]==null?'img/add_image_2.png':ngModel[$index].startWith('http')?ngModel[$index]:fileUrl+ngModel[$index]}}"
+           ng-click="openVideoFileDlg('picture',$index,$event)" ng-if="!readonly"></img>
+    <img  width="100px" height="100px"  ng-src="{{ngModel[$index]==''||ngModel[$index]==null
+    ||ngModel[$index].startWith('http')?ngModel[$index]:fileUrl+ngModel[$index]}}" ng-if="readonly"></img>
+ <div>
+      <label ng-show="pic.width==0 && pic.height==0">{{'artwork'|translate}}</label>
+      <label ng-show="pic.width!=0 || pic.height!=0">{{pic.width}}*{{pic.height}}</label>
+ </div>
+          
+</div>
+</div>

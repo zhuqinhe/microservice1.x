@@ -1,0 +1,45 @@
+
+<div class="ngdialog-header center">
+	<p>{{'msg'|translate}}</p>
+</div>
+<div class="ngdialog-message center">
+	<p class="bigger-110 bolder center grey btn-fsw-mes">{{'areyousureretry'|translate}}</p>
+
+	<span>
+		<label >{{'event_type'|translate}}:</label>
+		
+			<div class="btn-group ">
+				<button class="btn btn-default dropdown-toggle" type="button"
+					id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="true">
+					<span ng-repeat="d in distributeInfo track by $index" ng-if="d.selected"> 
+						<span>{{d.name|translate}}</span> 
+						<aclass="remove-button" ng-click="d.selected=false">×</a>
+					</span>
+					<span class="caret"></span>
+				   
+				</button>
+				<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+					<li ng-repeat="d in distributeInfo track by $index"
+						><a ng-click="d.selected = !d.selected">{{d.name|translate}}<i
+							class="icon-ok" ng-if="d.selected"></i></a></li>
+					<li role="separator" class="divider"></li>
+					<li><a ng-click="selectAll()"> {{'all'|translate}}</a></li>
+				</ul>
+
+			</div>
+
+		
+	</span>
+
+</div>
+<div class="ngdialog-buttons center">
+	<button type="button" class="btn btn-xs bigger-110 btn-fsw-ok"
+		ng-click="retry()">
+		<img src='img/btn_icon_ok.png'></img>{{'ok'|translate}}
+	</button>
+	<button type="button" class="btn btn-fsw-cancel btn-xs bigger-110"
+		ng-click="closeThisDialog('Cancel')">
+		<img src="img/btn_icon_cancel.png"></img>{{'cancel'|translate}}
+	</button>
+</div>

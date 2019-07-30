@@ -1,0 +1,35 @@
+server:
+  port: 6000
+  servlet:
+  context-path: /microservicem/
+spring: 
+  cloud:
+    config:
+      profile: dev 
+      label: master
+      discovery:
+        enabled: true
+        service-id:  config-server
+  application: 
+    name: microservicem
+  rabbitmq: 
+    host: localhost
+    port: 5672
+    username: hoob
+    password: zhuqinhe
+  data: 
+    mongodb: 
+      uri: mongodb://localhost:27017/favorite
+      option: 
+        min-connection-per-host: 0
+        max-connection-per-host: 10
+        max-wait-time: 10000
+        connect-timeout : 30000
+logging:
+  level:
+    root: INFO
+    com.test: DEBUG
+management:                  
+  security:
+    enabled: false
+ 

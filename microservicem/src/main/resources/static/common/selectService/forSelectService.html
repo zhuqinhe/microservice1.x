@@ -1,0 +1,178 @@
+<style>
+.fig-tab1 {
+	display: inline-block;
+	padding-right: 10px;
+	float: right;
+}
+.fig-tab1 input[type="checkbox"]
+ {
+	-webkit-appearance:none;
+	-moz-appearance:none;
+	width: 12px; height: 12px;
+	border-radius: 0; border: 0;
+	-moz-border-radius: 0;
+	-moz-border: 0;
+	vertical-align: top;
+	margin: 0;
+	outline: none;
+	background-repeat: no-repeat;
+	margin-left: 10px;
+	margin-top: 3px;
+}
+</style>
+
+
+ <div  id="modalForService" class="modal fade" id="modalForService"
+	tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+	aria-hidden="true" style="z-index:10000">
+	<div class="modal-dialog" style="width:900px;">
+		<div class="modal-content">
+			<div class="widget-header">
+				<h4>{{'association_service'|translate}}</h4>
+				<div class="widget-toolbar">
+					<a href="" ng-click="closeServiceDomal()"> 
+						<i class="icon-remove"></i>
+					</a>
+				</div>
+			</div>
+			<div class="widget-body">
+				<div class="widget-main" id="contentscroll">
+					<form class="form-inline">
+						<label>{{'servicename'|translate}} :</label><span class="input-icon">
+							<input type="text" class="input-medium input-search"
+							ng-model="queryOptionsForService.name" placeholder="{{'servicename'|translate}}"
+							style="background: url(img/tool/icon_search.png) no-repeat; background-position: 3px 4px; padding-bottom: 1px;"/>
+						</span>
+						<button type="button"
+							class="btn btn-default btn-tool btn-fon ico-search"
+							ng-click="forServiceSearch()" id="search">{{'search'|translate}}</button>
+						<button type="button"
+							class="btn btn-default btn-tool btn-fon ico-reset"
+							ng-click="forServiceRest()">{{'reset'|translate}}</button>
+					</form>
+					<at-Forservice></at-Forservice> 
+					<div class="hr hr-dotted hr18"></div>
+					<div class="space-8"></div>
+					<div class="row">
+						<div class="col-xs-12">
+							<div class="table-responsive">
+								<table class="table table-striped table-bordered table-hover"
+									colresizeable>
+									<thead>
+										<tr >
+											<th style="width: 5%;">			
+										<label ng-click="selectAllForService()" >
+							                <input type="checkbox" class="ace" ng-model="checkAll2" />
+							                <span class="lbl"></span></label>  </th>
+											<th style="width: 10%; ">{{'servicename'|translate}}</th>
+						                    <th style="width: 10%" >{{'servicecode'|translate}}</th>
+						                    <th style="width: 10%; " >{{'serviceprovider'|translate}}</th>
+						                    <th style="width: 10%; ">{{'defaultServices'|translate}}</th>
+						                    <th style="width: 10%; ">{{'servicetype'|translate}}</th>
+						                    <th style="width: 10%; ">{{'price'|translate}}</th>
+						                 <!--    <th style="width: 10%; ">{{'fixedFee'|translate}}</th> -->
+						                    <th style="width: 15%; ">{{'description'|translate}}</th>
+						                    <th style="width: 10%; ">{{'onlineStatus'|translate}}</th>
+										</tr>
+									
+									</thead>
+									<tbody>
+										<tr ng-repeat="item in serviceData"
+											style="width: 50px; height: 30px;"  ng-click="selectRowForService(item)" ng-disabled='item.isDefault == true'>
+											<td>
+									
+									<input type="checkbox" class="ace"
+									ng-model="item.checked"  ng-change="selectRowForService(item)" ng-disabled='item.isDefault == true'/>
+							        <span class="lbl"></span>
+											</td>
+											<td  title={{item.name}}>{{item.name}}</td>
+						                    <td  title="{{item.code}}">{{item.cpCode}}</td>
+						                    <td  title={{item.cpId}} >{{item.cpId}}</td>
+						                    <td>
+							                <span ng-show="item.isDefault == true" >{{'yes'|translate}}</span>
+							                <span ng-show="item.isDefault == false" >{{'no'|translate}}</span>
+						                    </td>
+						                    <td>
+							                <span ng-show="item.model==0">{{'freeservice'|translate}}</span>
+							                <span ng-show="item.model==1">{{'payservice'|translate}}</span>
+						                    </td>
+											<td  title="{{item.price}}">{{item.price}}</td>
+<!-- 						                    <td  title="{{item.fixedFee}}">{{item.fixedFee}}</td>
+ -->						                    <td  title="{{item.description}}">{{item.description}}</td>
+											<td>
+							                <span ng-show="item.publishStatus == 0 || item.publishStatus==null" style="color: #a0a0a0"><strong>{{'offlined'|translate}}</strong></span>
+							                <span ng-show="item.publishStatus == 1" style="color: #82af6f"><strong>{{'onlined'|translate}}</strong></span>
+						                    </td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							
+							<div ng-grid-footer="" class="ng-scope">
+								<div ng-style="footerStyle()" class="ngFooterPanel ng-scope"
+									style="width: 100%; height: 36px;">
+									<div class="ngTotalSelectContainer">
+										<div class="ngFooterTotalItems">
+											<span class="ngLabel ng-binding">
+												{{'total'|translate}}: {{pagingOptionsForService.total}} </span>
+										</div>
+									</div>
+									<div style="float: right; margin-top: 3px;"
+										class="ngPagerContainer">
+										<div class="ngRowCountPicker"
+											style="float: left; margin-right: 10px;">
+											<span class="ngLabel ng-binding"
+												style="float: left; margin-top: 4px;">{{'pageSize'|translate}}:</span>
+											<select ng-model="pagingOptionsForService.pageSize"
+												style="float: left; height: 25px; min-width: 45px"
+												class="ng-pristine ng-valid">
+												<option ng-repeat="size in pagingOptionsForService.pageSizes"
+													class="ng-binding ng-scope">{{size}}</option>
+											</select>
+										</div>
+										<div class="ngPagerControl"
+											style="float: left; margin-right: 10px;">
+											<button title="First Page" ng-disabled="cantPageBackwardForService(pagingOptionsForService)"
+												ng-click="pageToFirstForService(pagingOptionsForService)" class="ngPagerButton btn-page"
+												type="button" disabled="disabled"
+												style="background-image: url(img/pageCtrl/icon_2.png);"></button>
+											<button title="Previous Page"
+												ng-disabled="cantPageBackwardForService(pagingOptionsForService)" ng-click="pageBackwardForService(pagingOptionsForService)"
+												class="ngPagerButton btn-page" type="button"
+												disabled="disabled"
+												style="background-image: url(img/pageCtrl/icon_1.png);"></button>
+											<input ng-model="pagingOptionsForService.currentPage"
+												onkeyup="this.value=this.value.replace(/\s/g,'')"
+												style="height: 20px; width: 20px; vertical-align: top; margin-top: 3px;"
+												class="ngPagerCurrent ng-pristine ng-valid ng-valid-number ng-valid-min" />
+											<span ng-show="pagingOptionsForService.maxPages &gt; 0" class="maxPages">/{{pagingOptionsForService.maxPages}}</span>
+											<button title="Next Page" ng-disabled="cantPageForwardForService(pagingOptionsForService)"
+												ng-click="pageForwardForService(pagingOptionsForService)" class="ngPagerButton btn-page"
+												type="button"
+												style="background-image: url(img/pageCtrl/icon_1_next.png);"></button>
+											<button title="Last Page" ng-disabled="cantPageForwardForService(pagingOptionsForService)"
+												ng-click="pageToLastForService(pagingOptionsForService)" class="ngPagerButton btn-page"
+												type="button"
+												style="background-image: url(img/pageCtrl/icon_2_next.png);"></button>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					
+					</div>
+				</div>
+				<div align="center" class="row">
+					<button class="btn btn-info" type="button"
+						ng-click="association()" ng-disabled="selectedForService()">
+						<i class="icon-ok"></i> {{'ok'|translate}}
+					</button>
+					<button class="btn btn-info" type="button"
+						ng-click="closeServiceDomal()">
+						<i class="icon-undo"></i> {{'cancel'|translate}}
+					</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

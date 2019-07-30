@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.microservice.cloud</groupId>
+	<artifactId>microservice-spring-cloud</artifactId>
+	<version>0.0.1-SNAPSHOT</version>
+	<packaging>pom</packaging>
+
+	<modules>
+		<module>microservice-discovery-eureka</module>
+		<module>microservice-testclient</module>
+		<module>microservice-favorite</module>
+		<module>microservice-bookmark</module>
+		<module>microservice-comment</module>
+	    <module>microservice-reminder</module>
+		<module>microservice-udcm</module>
+		<module>microservice-sync-data</module>
+		<module>zmicroservice-hystrix-dashboard</module>
+		<module>microservice-turbine</module>
+		<module>microservice-metadata</module>
+		<module>microservice-search</module>
+		<module>microservice-config-server</module>
+	</modules>
+	
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>1.8</java.version>
+	</properties>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<!-- <version>2.0.4.RELEASE</version> -->
+	   <!--  <version>1.5.3.RELEASE</version> -->
+	   <version>  1.5.9.RELEASE</version>
+	</parent>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<!-- <version>Camden.SR7</version> -->
+				<!--  <version>Dalston.RELEASE</version> -->
+				 <version>Edgware.RELEASE</version> 
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-maven-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

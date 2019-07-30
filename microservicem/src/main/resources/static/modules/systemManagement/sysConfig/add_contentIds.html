@@ -1,0 +1,67 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+
+	<ul class="breadcrumb">
+		<li><a href="#/sysconfig/edit/1">{{'createContentId'|translate}}</a></li>
+		<li class="active">{{'addEdit'|translate}}</li>
+	</ul>
+</div>
+<!-- .breadcrumb -->
+
+<div class="page-content">
+		<div class="col-sm-3 center">
+			<h3><strong>{{'createContentId'|translate}}</strong></h3>
+		</div>
+		
+		<div class="col-xs-12">
+			<form class="form-horizontal" role="form" name="add_form">
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'headValue'|translate}}<font color="red">*</font>:</label>
+					<div class="col-sm-4">
+						<input class="form-control input-search" type="text" ng-model="data.head" required="required" name="head" ng-change="checkHead()"
+						ng-pattern="/^\d{4}$/">
+						<small class="error" style="color: red;"
+						ng-show="add_form.head.$dirty && add_form.head.$invalid && add_form.head.$error.pattern">{{'fournumber'|translate}}</small>
+						<small class="error" style="color: red;"
+						ng-show="repeatHead!=0">{{'headexists'|translate}}</small>
+					</div>
+					<label class="col-sm-4 no-padding-left" style="text-align: left">{{'headInfo'|translate}}</label>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'contentIdNum'|translate}}<font color="red">*</font>:</label>
+					<div class="col-sm-4">
+						<input class="form-control input-search" type="text" ng-model="data.number" name="timeshiftDuration" required="required" 
+							placeholder="{{'maxNum'|translate}}" ng-pattern="/^\+?[1-9][0-9]*$/"
+							maxlength="6">
+						<small class="error" style="color: red;"
+						ng-show="add_form.timeshiftDuration.$dirty && add_form.timeshiftDuration.$invalid && add_form.timeshiftDuration.$error.pattern">{{'maxnumber'|translate}}</small>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'exeTime'|translate}}:</label>
+					<div class="col-sm-4">
+						<input type="text" name="exeTime" ng-model="data.exeTime"
+							class="form-control validtimepicker input-search" 
+							ng-blur="checkTime(exeTime)" />
+					</div>
+				</div>
+			</form>	
+			<div class="clearfix form-actions fsw-form-actions">
+				<div style="text-align: center;">
+					<button class="btn btn-success btn-tool btn-fon" type="button"
+					ng-if="rootPris.sysmanage_sysconfig_add"	ng-click="saveItem(manFlag)" ng-disabled="add_form.$invalid">
+						<i class="icon-ok bigger-110"></i> {{'submit'|translate}}
+					</button>
+					&nbsp; &nbsp; &nbsp; <a class="btn btn-default btn-tool btn-fon"
+						type="reset" href="#/sys/sysconfig/list/0"> <i
+						class="icon-undo bigger-110"></i> {{'return'|translate}}
+					</a>
+				</div>
+			</div>
+		</div>
+</div>

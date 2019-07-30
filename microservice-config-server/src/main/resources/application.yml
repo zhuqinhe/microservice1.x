@@ -1,0 +1,32 @@
+server:
+  port: 8888
+spring:
+  cloud:
+    config:
+      server:
+        git:
+         # uri: https://github.com/hoobzhu/{application}  #一个微服务一个仓库
+          uri: https://github.com/hoobzhu/manger-config
+          search-paths: "{application}"  
+  application:
+    name: config-server
+  rabbitmq:  #本地环境不需要配置mq，但是需要启动mq,Springboot会自动连接本地mq
+    host: localhost
+    port: 5672
+    username: hoob
+    password: zhuqinhe
+eureka: 
+  client: 
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 10 #eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）默认30 ，生成环境不建议修改
+management:                  #SpringCloud 1.5.0版本以后暴露接口方式 暴露/bus-refresh接口
+  security:
+    enabled: false
+ # endpoints:                  #SpringCloud 2.0.0版本以后暴露接口方式 暴露/bus-refresh接口
+ #  web: 
+ #    exposure: 
+ #      include: "*"

@@ -1,0 +1,59 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}</script>
+
+	<ul class="breadcrumb">
+		<li>
+			<a href="#/security/role/list/0">{{'usergroup'|translate}}</a>
+		</li>
+		<li class="active">{{'addEdit'|translate}}</li>
+	</ul>
+</div>
+<!-- .breadcrumb -->
+
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" name="add_form" novalidate>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">
+						{{'name'|translate}}
+						<font color="red">*</font>:
+					</label>
+					<div class="col-sm-4">
+						<input type="text" name="name" ng-model="data.name" maxlength="50"
+							class="form-control input-search" required/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'description'|translate}}:</label>
+					<div class="col-sm-4">
+						<textarea class="form-control textarea-add limited" rows="8" maxlength="255"
+							maxlength="1000" ng-model="data.description"></textarea>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-4 control-label no-padding-right">{{'setPrivilege'|translate}}:</label>
+					<div class="col-sm-4">
+						<span id="privilegeTree"></span>
+					</div>
+				</div>
+
+				<div class="clearfix form-actions">
+					<div class="col-md-offset-4 col-md-9">
+						<button class="btn btn-default btn-tool btn-fon btn-success" type="button" ng-click="saveItem()"
+							ng-disabled="add_form.$invalid"> <i class="icon-ok bigger-110"></i>
+							{{'submit'|translate}}
+						</button>
+						&nbsp; &nbsp; &nbsp;
+						<a class="btn btn-default btn-tool btn-fon" href="#/security/role/list/1">
+							<i
+							class="icon-undo bigger-110"></i>
+							{{'cancel'|translate}}
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>

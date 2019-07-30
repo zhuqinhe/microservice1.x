@@ -1,0 +1,100 @@
+<style>
+.moive-dialog .ngdialog-content {
+	width: 800px !important;
+}
+</style>
+<div id="file_list">
+	<div class="col-sm-12">
+		<div class="widget-box"
+				style="border-bottom-width: 0px; margin-bottom: 0px;width:600px;">
+			<div class="widget-header">
+				<h4>{{'selectContent'|translate}}</h4>
+				<div class="widget-toolbar">
+					<a href="" ng-click="closeThisDialog('Cancel')">
+						<img
+							src="img/btn_x_popup.png"></img></i> 
+			</a>
+		</div>
+	</div>
+
+	<div class="widget-body">
+		<div class="widget-main"
+						style="max-height: 600px; overflow-y: auto; overflow-x: hidden;"
+						id="filescroll">
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div style="padding: 5px">
+						<div >
+							<label>{{'name'|translate}} :</label>
+							<span class="input-icon">
+								<input type="text" class="input-medium input-search"
+										ng-model="queryOptions.name"
+										placeholder="{{'name'|translate}}/{{'contentID'|translate}}"
+										style="background: url(img/tool/icon_search.png) no-repeat; background-position: 3px 4px; padding-bottom: 1px;" />
+							</span>
+							<span style="margin-left: 61px;">
+								<button type="button" class="btn btn-default btn-tool btn-fon"
+											ng-click="search()" id="search"
+											style="background-image: url(img/tool/button_search.png)">{{'search'|translate}}</button>
+								<button type="button" class="btn btn-default btn-tool btn-fon"
+											ng-click="reset()"
+											style="background-image: url(img/tool/icon_reset.png)">{{'reset'|translate}}</button>
+							</span>
+						</div>
+						<br />
+						<table
+										style="margin-bottom: 0px; text-align: center; table-layout: fixed;"
+										class="table table-bordered table-hover"
+										colresizeable>
+							<thead >
+								<tr style="background-color: #f2f2f2;font-size:15px;color:#4B5154;">
+									<th style="width: 5%;">
+											<label ng-click="selectAll()">
+												<input type="checkbox" class="ace" ng-model="checkAll" /> <span
+												class="lbl"></span>
+											</label>
+									</th>
+									<th style="width: 10%;">{{'id'|translate}}</th>
+									<th style="width: 20%;">{{'name'|translate}}</th>
+									<th style="width: 20%;">{{'code'|translate}}</th>
+								</tr>
+							</thead>
+
+							<tbody>
+								<tr style="background-color: #fff;font-size:15px;color:#A8A8A8;" ng-repeat="item in items" 
+								ng-click="selectRow();item.checked=!item.checked">
+									<td><input type="checkbox" class="ace"
+										ng-model="item.checked" ng-change="item.checked=!item.checked" />
+										<span class="lbl"></span>
+									</td>
+									<td ng-bind="item.id" title={{item.id}}></td>
+									<td ng-bind="item.name" title={{item.name}}></td>
+									<td ng-bind="item.code" title={{item.code}}></td>
+									
+								</tr>
+							</tbody>
+						</table>
+						<div ng-grid-footer="" class="ng-scope">
+							<at-pagination></at-pagination>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div align="center" class="row" style="margin-bottom: 15px;">
+			<button class="btn btn-info" type="button" style="background-color: #87b87f !important" ng-disabled="!hasCheckedItem()" 
+							ng-click="closeFileDlg()"> <i class="icon-ok bigger-110"></i>
+				{{'ok'|translate}}
+			</button>
+			&nbsp; &nbsp; &nbsp; &nbsp;  &nbsp;
+			<button class="btn btn-info" type="button" style="color: rgb(93, 88, 88);background-color: #eeeeee !important"
+							ng-click="closeThisDialog('Cancel')"> <i class="icon-undo bigger-110"></i>
+				{{'cancel'|translate}}
+			</button>
+		</div>
+	</div>
+</div>
+</div>
+</div>

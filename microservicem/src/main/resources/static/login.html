@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" ng-app=login ng-cloak>
+<head>
+<meta charset="utf-8" />
+<META http-equiv="Expires" content="0">
+<META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+<META http-equiv="Pragma" content="no-cache">
+<title translate='cms_title'></title>
+<link rel="shortcut icon" href="img/icon_logo.png">
+<!-- basic styles -->
+<link href="plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+<link rel="stylesheet" href="css/login/login.css" />
+<link rel="stylesheet" href="plugin/ace/css/jquery-ui-1.10.3.full.min.css" />
+<link rel="stylesheet" href="plugin/ace/css/ui.jqgrid.css" />
+
+<!-- ace styles -->
+<link rel="stylesheet" href="plugin/ace/css/ace.min.css" />
+
+<!-- ace settings handler -->
+<script src="plugin/jquery/js/jquery.min.js"></script>
+<script src="plugin/moment/moment.js"></script>
+<script src="plugin/bootstrap/js/bootstrap.min.js"></script>
+<script src="plugin/angular/angular.js"></script>
+<script src="plugin/angular/angular-sanitize.js"></script>
+<script src="plugin/angular-route/angular-route.min.js"></script>
+<script src="plugin/bootstrap/js/ui-bootstrap-tpls-0.11.0.js"></script>
+<!--<script src="plugin/angular-resource/angular-resource.js"></script>-->
+<script src="plugin/angular-translate/angular-translate.min.js"></script>
+<script src="plugin/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+<script src="plugin/angular-cookies/angular-cookies.min.js"></script>
+<!--<script src="plugin/angular-translate-storage-cookie/angular-translate-storage-cookie.min.js"></script>
+<script src="plugin/angular-translate-storage-local/angular-translate-storage-local.min.js"></script>-->
+	<script src="plugin/crypto-js/core.js"></script>
+<script src="plugin/crypto-js/enc-base64.js"></script>
+<script src="plugin/crypto-js/hmac.js"></script>
+<script src="plugin/crypto-js/md5.js"></script>
+<script src="plugin/crypto-js/sha256.js"></script>
+<script src="js/PinYin.js?a=${prefix.revision}1"></script>
+<script src="modules/loginManagement/login/controllers_login.js?a=${prefix.revision}1"></script>
+<script src="js/directives.js?a=${prefix.revision}1"></script>
+<script src="js/filters.js?a=${prefix.revision}1"></script>
+<script src="js/services.js?a=${prefix.revision}1"></script>
+<script src="js/factory.js?a=${prefix.revision}1"></script>
+<script src="js/app.js?a=${prefix.revision}1"></script>
+
+</head>
+
+<body ng-controller="LoginCtrl" style="background-color: white; font-family: 'login_font_family' !important; overflow-x: hidden;margin:0;padding:0">
+<div class="row center login-header" style="height:{{loginTop}};background-color: #3681ba">
+	<div style="height:{{loginTop}}; background-color: #3681ba"></div>
+    <img ng-if="login_logo!='img/icon_logo.png'" style="margin-top: -50px" height="30px" weight="30px" ng-src="{{login_logo}}"> 
+    <img ng-if="login_logo=='img/icon_logo.png'" style="margin-top: -32px" height="55px" weight="55px" ng-src="{{login_logo}}">
+</div>
+
+<div style="margin-top: 25px; height: 346px;" class="row center login-content">
+	<span style="color: #3681ba; font-size: 25px;" translate='cms_management'></span>
+	<div id="inputs" class="loginInfo">
+		<form name="login_form" id="login_form" novalidate>
+			<div class="row" style="margin-bottom: 10px;">
+				<label class="control-label col-sm-5">{{'username'|translate}}</label>
+				<div class="login-input col-sm-6 no-padding-left">
+					<input id="username" tabindex="1" maxlength="100" type="text" placeholder="{{'username'|translate}}"
+						   ng-model="username" autocomplete="off" autofocus required>
+					<label ng-show="username"  ng-click="username=''"
+						   style="background: url(img/login/icon_x.png) no-repeat; width: 17px; height: 17px;" >
+					</label>
+						<span ng-show="showMessage&&resultCode==20005" class="login_error_meesage">
+							{{'loginFail'|translate}}
+						</span>
+						<span ng-show="isNull&&!username" class="login_error_meesage">
+							{{'userIsNull'|translate}}
+						</span>
+						<span ng-show="showMessage&&!username&&resultCode==-2" class="login_error_meesage">
+							{{'userNotExist'|translate}}
+						</span>
+						<span ng-show="showMessage&&resultCode==20012" class="login_error_meesage">
+							{{'loginfaileduserdisabled'|translate}}
+						</span>
+						<span ng-show="showMessage&&resultCode==20011" class="login_error_meesage">
+							{{'ipisnoauth'|translate}}
+						</span>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom: 10px;">
+				<label class="control-label col-sm-5">{{'password'|translate}}</label>
+				<div class="login-input col-sm-6 no-padding-left">
+					<input id="password" tabindex="2" type="password" class="" maxlength="100"
+						   placeholder="{{'password'|translate}}" ng-model="password" required >
+					<label ng-show="password" ng-click="password=''"
+						   style="background: url(img/login/icon_x.png) no-repeat; width: 17px; height: 17px;" >
+					</label>
+						<span ng-show="isNull&&!password" class="login_error_meesage">
+							{{'passwordIsNull'|translate}}
+						</span>
+						<span ng-show="showMessage&&!password&&resultCode==-1" class=" login_error_meesage">
+							{{'passwordNotCorrent'|translate}}
+						</span>
+				</div>
+			</div>
+			<div class="row" style="margin-bottom: 10px;">
+				<label class="control-label col-sm-5">{{'VerificationCode'|translate}}</label>
+				<div class="login-input col-sm-6 no-padding-left">
+					<input id="validateCode" tabindex="3" class="capt-input" ng-model="captcha" maxlength="20" placeholder="{{'pleaseEnterVerificationCode'|translate}}" required>
+					<label ng-show="captcha" ng-click="captcha=''"
+						   style="background: url(img/login/icon_x.png) no-repeat; width: 17px; height: 17px; margin-left: -24px">
+					</label>
+							<span class="capt-img">
+								<img id="codeValidateImg" ng-src="rest/ui/v1/generate/captcha?requestid={{requestid}}&language=1"  ng-click="flushValidateCode()" />
+							</span>
+					<span ng-show="showMessageCaptcha&&!captcha&&resultCode==20003" class="login_error_meesage">{{'VerificationCodeIsError'|translate}}</span>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-6 no-padding-left">
+					<button type="submit"  tabindex="4" ng-click="dologin()" class="btn btn-sm btn-primary no-border col-sm-6"
+							style="margin-bottom: 10px;font-size: 18px; width: 300px;">
+						<i style="font-style: normal !important;" translate='login'></i>
+					</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-sm-5"></div>
+				<div class="col-sm-5">
+					<label class="col-sm-3 no-padding" style="text-align: left">
+						<input name="selectlang" ng-click="changeLanguage(lang1,1)" id="lang1" type="checkbox" class="login" />
+						<span class="lbl_login"> {{lang11+''|translate}}</span>
+					</label>
+					<label class="col-sm-3 no-padding" style="text-align: left">
+						<input name="selectlang" ng-click="changeLanguage(lang2,2)" id="lang2" type="checkbox" class="login" />
+						<span class="lbl_login">{{lang22+''|translate}}</span>
+					</label>
+				</div>
+
+			</div>
+		</form>
+	</div>
+</div>
+<div class="login-footer" style="left: 0px; bottom: 0px; background-color: #2681ba; width: 100%;margin-top: 10px;height:{{loginBottom}}">
+</div>
+<div class="loading" style="z-index: 999;">
+	<img src="plugin/ace/css/images/loading.gif" style="position: fixed; top: 65%" />
+</div>
+<script>
+	jQuery(function($) {
+		document.getElementById('username').focus();
+	});
+</script>
+</body>
+</html>

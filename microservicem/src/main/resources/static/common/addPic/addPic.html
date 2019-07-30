@@ -1,0 +1,130 @@
+<style>
+.add-pic {
+	padding-top: 40px !important;
+}
+.add-pic .ngdialog-content {
+	width: 800px !important;
+}
+h4 {
+	padding: 15px;
+	border-bottom: 1px solid #e5e5e5;
+}
+</style>
+
+
+<div>
+	<h4>{{'select'|translate}}</h4>
+	<div style="padding-left: 10px; padding-right: 10px;">
+		<tabset id="fileTabs">
+			<tab ng-click="selectByServer()" ng-if='scene!=jslt'>
+				<tab-heading>{{'selectFile'|translate}}</tab-heading>
+				<label>{{'selectServer'|translate}}:</label>
+				<select ng-model="$parent.selectedFtpServerId" ng-change="ftpServerChange($parent.selectedFtpServerId)">
+					<option value="local" selected="selected">{{'localServer'|translate}}</option>
+					<option ng-repeat="ftp in ftpServers" value="{{ftp.id}}"
+						ng-selected="ftp.id==selectedFtpServerId">{{ftp.hostIp}}</option>
+				</select>
+				<label>{{'path'|translate}}:{{path}}</label>
+				<div class="gridStyle" ng-grid="gridOptions"></div>
+				<div class="ngdialog-buttons" align="center" class="row">
+					<button class="btn btn-info" type="button" ng-click="returnFile()"
+						ng-disabled="buttonDisable"> 
+						<i class="icon-reply"></i>
+						{{'up'|translate}}
+					</button>
+					<!-- selectFile(1,sfile) -->
+					<button class="btn btn-info" type="button" ng-disabled="buttonDisable" 
+						ng-click="selectFile(1,sfile)">
+						<i class="icon-ok"></i>
+						{{'ok'|translate}}
+					</button>
+					<button class="btn btn-info" type="button" ng-disabled="buttonDisable" ng-click="closeThisDialog();">
+						<i class="icon-undo"></i>
+						{{'cancel'|translate}}
+					</button>
+				</div>
+			</tab>
+			<tab ng-click="selectByLocal()" ng-if="uploadFlag!='url'">
+				<tab-heading>{{'uploadFromLocal'|translate}}</tab-heading>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="col-sm-2 control-label no-padding-right" style="text-align: right;">{{'name'|translate}}:</label>
+							<div class="col-sm-7">
+								<input type="text" name="videoname" ng-model="videoname"
+								class="form-control input-search" />
+							</div>
+							<div class="col-sm-3">
+								<div class="file-box">
+									<input ng-if="uploadFlag !='file'" type="file" accept="image/bmp,image/jpg,image/jpeg,image/png,image/gif,image/tif,image/tiff,image/ai,
+									image/drw,image/pct,image/psp,image/xcf,image/psd,image/raw,.apk"
+										ng-file-select="fileSelect($files)" style="display: none" id="pictureupload">
+									<input ng-if="uploadFlag =='file'" type="file" accept=".txt,.xml,.xls,.xlsx"
+										ng-file-select="fileSelect($files)" style="display: none" id="pictureupload">
+									<input type='button' class='btn btn-info btn-sm' value="{{'addFile'|translate}}" id="pictureuploadbtn"
+										onclick="uploadFileClick(this)" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div class="ngdialog-buttons" align="center" class="row">
+					<button class="btn btn-info" type="button" ng-click="uploadPicture()" ng-disabled="videoname==''">
+						<i class="icon-ok"></i>
+						{{'ok'|translate}}
+					</button>
+					<button class="btn btn-info" type="button" ng-click="closeThisDialog()">
+						<i class="icon-undo"></i>
+						{{'cancel'|translate}}
+					</button>
+				</div>
+			</tab>
+			<tab ng-click="selectByUrl()" ng-if="true">
+				<tab-heading>{{'inputUrl'|translate}}</tab-heading>
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="form-group">
+							<label class="col-sm-2 control-label no-padding-right">{{'url'|translate}}:</label>
+							<div class="col-sm-8">
+								<textarea class="form-control limited" maxlength="1024"
+							rows="8" ng-model="$parent.fileUrl"></textarea>
+							</div>
+						</div>
+					</div>
+				</div>
+				<br />
+				<div align="center" class="row">
+					<button class="btn btn-info" type="button" ng-click="selectFile(2,fileUrl)">
+						<i class="icon-ok"></i>
+						{{'ok'|translate}}
+					</button>
+					<button class="btn btn-info" type="button" ng-click="closeThisDialog()">
+						<i class="icon-undo"></i>
+						{{'cancel'|translate}}
+					</button>
+				</div>
+
+			</tab>
+		</tabset>
+	</div>
+</div>
+<script>
+   	var enableClick = true;
+	var time;  
+	function uploadFileClick(obj) {
+		if(enableClick) {
+			enableClick = false;
+			time = window.setTimeout(function(){enableClick = true;},1000);
+		}
+		else {
+			window.clearTimeout(time);
+			time = window.setTimeout(function(){enableClick = true;},1000);
+			return false
+		}
+    	var self = obj;
+    	var id = self.id;
+    	console.log(">>>>>obj id is:" + self.id);
+    	$("#" + id).parent().children("input[type='file']").click();
+	}
+</script>

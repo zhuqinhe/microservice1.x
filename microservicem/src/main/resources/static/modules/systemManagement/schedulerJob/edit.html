@@ -1,0 +1,224 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}</script>
+
+	<ul class="breadcrumb">
+		<li> <i class="icon-home home-icon"></i>
+			<a href="#/sys/schedulejob/list">{{'scheduleJobManage'|translate}}</a>
+		</li>
+		<li class="active">{{'addEdit'|translate}}</li>
+	</ul>
+</div>
+
+<style>
+    
+    #clear {
+      margin-bottom: 10px;
+      cursor: pointer;
+    }
+    .preview {
+      padding: 10px;
+      font-size: 24px;
+    }
+  </style>
+<!--save fail tip confirm-->
+<div class="col-sm-6">
+	<div id="dialog-tip" class="hide">
+		<p class="bigger-110 bolder center grey">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'saveFail'|translate}}
+		</p>
+	</div>
+</div>
+
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<form class="form-horizontal" role="form" name="add_form" novalidate>
+				
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'onlyname'|translate}} :</label>
+					<div class="col-sm-7">
+						<input type="text" name="name" ng-model="item.jobName"
+							class="form-control input-search" disabled/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'description'|translate}} :</label>
+					<div class="col-sm-7">
+						<input type="text" name="description" ng-model="item.description"
+							class="form-control input-search"/>
+					</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'jobGroup'|translate}} :</label>
+				<!-- 	<div class="col-sm-7">
+						<input type="text" name="group" ng-model="item.jobGroup"
+							class="form-control input-search"/>
+					</div> -->
+					<div class="col-sm-7">
+					<select  style="padding-top: 2px;width: 100px;height: 25px;" ng-model="item.jobGroup">
+										<option ng-repeat="gr in Gorup" ng-selected="gr.key==item.jobGroup" value="{{gr.key}}"
+										>{{gr.name|translate}}</option>
+						</select>
+							</div>
+				</div>
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'cronExpression'|translate}} :</label>
+					<div class="col-sm-7">
+					   <input type="text" name="cron" ng-model="item.cronExpression"
+                                        class="form-control input-search" required disabled/>
+					</div>
+					<!-- <div class="col-sm-7">
+						<table>
+							<tr>
+								<td>
+									<input type="text" name="cron" ng-model="item.cronExpression"
+										class="form-control input-search" required readonly/>
+								</td>
+								<td>
+								<label class="control-label no-padding-right" style="width: 2px;"></label>
+								<div class="col-sm-4">
+									<select style="padding-top: 2px;width: 100px;height: 25px;" ng-model="seledDomain" ng-change="changeDomain()">
+										<option ng-repeat="domain in exprsndmns" ng-selected="domain.value==seledDomain" value="{{domain.value}}"
+										>{{domain.name}}</option>
+									</select>
+								</div>
+								</td>
+								<td>
+								<label class="control-label no-padding-right" style="width: 2px;"></label>
+								<div class="col-sm-4">
+									<select style="padding-top: 2px;width: 100px;height: 25px;" ng-model="seledForm" ng-click="saveOldValue()" ng-change="changeForm()">
+										<option ng-repeat="f in dsplayforms" ng-selected="f.value==seledForm" value="{{f.value}}"
+										>{{f.name}}</option>
+									</select>
+								</div>
+								</td>
+								<td>
+								<div class="col-sm-4">
+									<input type="text" ng-model="$parent.vlValue" id="s_vlinput" name="s_vlinput" ng-if="seledDomain=='s' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^(\d|[1-5]\d)(\,(\d|[1-5]\d))*$/' ng-change="saveDomainValue()"/>
+									<input type="text" ng-model="$parent.vlValue" id="mi_vlinput" name="mi_vlinput" ng-if="seledDomain=='mi' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^(\d|[1-5]\d)(\,(\d|[1-5]\d))*$/' ng-change="saveDomainValue()"/>
+									<input type="text" ng-model="$parent.vlValue" id="h_vlinput" name="h_vlinput" ng-if="seledDomain=='h' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^(\d|1\d|2[0-3])(\,(\d|1\d|2[0-3]))*$/' ng-change="saveDomainValue()"/>
+									<input type="text" ng-model="$parent.vlValue" id="dofm_vlinput" name="dofm_vlinput" ng-if="seledDomain=='dofm' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^(\d|[1-2]\d|3[0-1])(\,(\d|[1-2]\d|3[0-1]))*$/' ng-change="saveDomainValue()"/>
+									<input type="text" ng-model="$parent.vlValue" id="m_vlinput" name="m_vlinput" ng-if="seledDomain=='m' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^([1-9]|1[0-2])(\,([1-9]|1[0-2]))*$/' ng-change="saveDomainValue()"/>
+									<input type="text" ng-model="$parent.vlValue" id="dofw_vlinput" name="dofw_vlinput" ng-if="seledDomain=='dofw' && seledForm=='vl'"
+									style="width: 45px;height: 25px;" ng-pattern='/^[1-7](\,[1-7])*$/' ng-change="saveDomainValue()"/>
+									
+									<input type="number" ng-model="lstValue" ng-show="seledForm=='lst'" ng-change="checkLSTNum();saveDomainValue()"
+									style="width: 45px;height: 25px;" />
+									<input type="number" ng-model="wdValue" ng-show="seledForm=='wd'" ng-change="checkWDNum();saveDomainValue()"
+									style="width: 45px;height: 25px;" />
+									<input type="number" ng-model="cldValue" ng-show="seledForm=='cld'" ng-change="checkCLDNum();saveDomainValue()"
+									style="width: 45px;height: 25px;" />
+									<table ng-show="'rg,bi,od'.indexOf(seledForm)>=0">
+										<tr>
+											<td>
+												<input type="number" ng-model="lrgValue" style="width: 45px;" ng-change="checkRGNum(true);saveDomainValue()" ng-show="seledForm=='rg'"/>
+												<input type="number" ng-model="lbiValue" style="width: 45px;" ng-change="checkBINum(true);saveDomainValue()" ng-show="seledForm=='bi'"/>
+												<input type="number" ng-model="lodValue" style="width: 45px;" ng-change="checkODNum(true);saveDomainValue()" ng-show="seledForm=='od'"/>
+											</td>
+											<td ng-show="seledForm=='rg'">
+											-
+											</td>
+											<td ng-show="seledForm=='bi'">
+											/
+											</td>
+											<td ng-show="seledForm=='od'">
+											#
+											</td>
+											<td>
+												<input type="number" ng-model="rrgValue" style="width: 45px;" ng-change="checkRGNum(false);saveDomainValue()" ng-show="seledForm=='rg'" />
+												<input type="number" ng-model="rbiValue" style="width: 45px;" ng-change="checkBINum(false);saveDomainValue()" ng-show="seledForm=='bi'" />
+												<input type="number" ng-model="rodValue" style="width: 45px;" ng-change="checkODNum(false);saveDomainValue()" ng-show="seledForm=='od'"/>
+											</td>
+										</tr>
+									</table>
+								</div>
+								</td>
+								<td>
+									<label class="control-label no-padding-right" style="width: 4px;" ng-show="seledForm=='lst'">L</label>
+									<label class="control-label no-padding-right" style="width: 4px;" ng-show="seledForm=='wd'">W</label>
+									<label class="control-label no-padding-right" style="width: 4px;" ng-show="seledForm=='cld'">C</label>
+								</td>
+								<td>
+								<div class="error" style="color: red;width: 80px;">
+										<small class="error" style="width: 80px;" ng-show="add_form.s_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+										<small class="error" style="width: 80px;" ng-show="add_form.mi_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+										<small class="error" style="width: 80px;" ng-show="add_form.h_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+										<small class="error" style="width: 80px;" ng-show="add_form.dofm_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+										<small class="error" style="width: 80px;" ng-show="add_form.m_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+										<small class="error" style="width: 80px;" ng-show="add_form.dofw_vlinput.$error.pattern">{{'formaterr'|translate}}</small>
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div> -->
+					<!-- <div class="col-sm-4 error" style="color: red" ng-show="add_form.cron.$error.pattern">
+						<small class="error">{{'codeexists'|translate}}</small>
+					</div> -->
+				</div>
+				<!-- <div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'cronExprsnModify'|translate}}<font color="red">*</font> :</label>
+					<div class="col-sm-7">
+						<input type="text" name="newExprsn" ng-model="item.newExprsn"
+							class="form-control input-search" disabled/>
+					</div>
+				</div> -->
+				<div class="form-group">
+					<label class="col-sm-3 control-label no-padding-right">{{'status'|translate}} :</label>
+					<div class="col-sm-7">
+					<!-- 	<input type="text" ng-if="item.status == false" name="status" ng-value="'unenable'|translate"
+							class="form-control input-search" disabled/>
+						<input type="text" ng-if="item.status == true" name="status" ng-value="'enable'|translate"
+							class="form-control input-search" disabled/> -->
+					 <select  style="padding-top: 2px;width: 100px;height: 25px;" ng-model="item.status">
+										<option ng-selected="item.status == false"  value="false">{{'unenable'|translate}}</option>
+										<option ng-selected="item.status == true"  value="true">{{'enable'|translate}}</option>
+						</select>
+						<!-- <span ng-show="item.status == false">{{'unenable'|translate}}</span> -->
+					</div>
+				</div>
+                
+                <div class="form-group">
+                    <label class="col-sm-3 control-label no-padding-right">{{'cronExprsnModify'|translate}}<font color="red">*</font> :</label>
+                    <div class="col-sm-7">
+                        <div class="myDiv"></div>
+                    </div>
+                </div>
+				<div class="clearfix form-actions fsw-form-actions">
+					<div style="text-align: center;">
+						<button  class="btn btn-success btn-tool btn-fon" type="button" ng-click="saveItem()"
+								ng-disabled="add_form.$invalid">
+							<i class="icon-ok bigger-110"></i>
+							{{'submit'|translate}}
+						</button>
+						&nbsp; 	
+						<button type="button" class="btn btn-default btn-tool btn-fon"
+							ng-click="cronValidate()">
+							<i class="icon-ok bigger-110"></i>
+							{{'validate'|translate}}</button>
+							 &nbsp;
+						<a class="btn btn-default btn-tool btn-fon" href="#/sys/schedulejob/list">
+							<i class="icon-undo bigger-110"></i>
+							{{'cancel'|translate}}
+						</a>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<script src="plugin/cron-editor/js/jquery.croneditor.js"></script>
+<script type="text/javascript">
+    $(document).ready(function(){
+      // turn the div into a cron editor
+      $('.myDiv').croneditor({
+        value: "* * * * * ?"
+      });
+    });
+</script>

@@ -1,0 +1,46 @@
+
+<div ng-style="footerStyle()" class="ngFooterPanel ng-scope">
+	<div class="ngTotalSelectContainer">
+		<div class="ngFooterTotalItems">
+			<span class="ngLabel ng-binding">{{"total"|translate}}:
+				{{pagingOptions.total}} </span>
+		</div>
+	</div>
+	<div class="ngPagerContainer" style="float: right; margin-top: 3px;">
+		<div class="ngRowCountPicker" style="float: left; margin-right: 10px;">
+			<span class="ngLabel ng-binding"
+				style="float: left; margin-top: 4px;">{{"pageSize"|translate}}:
+			</span> 
+			<select ng-model="pagingOptions.pageSize"
+				style="float: left; height: 25px; min-width: 45px"
+				class="ng-pristine ng-valid" ng-options=" size for size in pagingOptions.pageSizes" >
+			</select>
+		</div>
+		<div class="ngPagerControl" style="float: left; margin-right: 10px;">
+			<button title="First Page" ng-disabled="cantPageBackward()"
+				ng-click="pageToFirst()" class="ngPagerButton btn-page"
+				type="button" disabled="disabled"
+				style="background-image: url(img/pageCtrl/icon_2.png)"></button>
+			<button title="Previous Page" ng-disabled="cantPageBackward()"
+				ng-click="pageBackward()" class="ngPagerButton btn-page"
+				type="button" disabled="disabled"
+				style="background-image: url(img/pageCtrl/icon_1.png);"></button>
+			<input ng-model="pagingOptions.currentPage"
+				onkeyup="this.value=this.value.replace(/\s/g,\\)"
+				style="height: 20px; width: 40px; vertical-align: top; margin-top: 3px; text-align: center"
+				class="ngPagerCurrent ng-pristine ng-valid ng-valid-number ng-valid-min">
+			<span ng-show="pagingOptions.maxPages &gt; 0" class="maxPages"
+				style="margin-bottom: 0px; padding-right: 4px">
+				/{{pagingOptions.maxPages}} </span>
+			<button title="Next Page" ng-disabled="cantPageForward()"
+				ng-click="pageForward()" class="ngPagerButton btn-page"
+				type="button"
+				style="background-image: url(img/pageCtrl/icon_1_next.png);">
+			</button>
+			<button title="Last Page" ng-disabled="cantPageForward()"
+				ng-click="pageToLast()" class="ngPagerButton btn-page" type="button"
+				style="background-image: url(img/pageCtrl/icon_2_next.png);">
+			</button>
+		</div>
+	</div>
+</div>

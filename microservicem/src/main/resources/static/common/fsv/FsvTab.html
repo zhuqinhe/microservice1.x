@@ -1,0 +1,20 @@
+<div>
+    <ul class="nav nav-tabs">
+        <li role="presentation" ng-repeat="t in tabConfigs" ng-class=" t.active ? 'active':'' " ng-hide="t.hide" >
+              <a ng-click="selectTab(t)" ng-if="needTranslate" >
+                    {{t[labelKey?labelKey:'label']|translate}}
+                    <i ng-click="deleteTab(t,$event)" ng-if="needRemove && tabLength > 1" class="icon-remove"></i>
+              </a>
+
+              <a ng-click="selectTab(t)" ng-if="!needTranslate" >
+                    {{t[labelKey?labelKey:'label']}}
+                    <i ng-click="deleteTab(t,$event)" ng-if="needRemove && tabLength > 1" class="icon-remove"></i>
+              </a>
+        </li>
+    </ul>
+    <div class=" tab-content no-padding-left no-padding-right  "  >
+            <div class="row" ng-transclude>
+           
+            </div>
+   </div>
+</div>

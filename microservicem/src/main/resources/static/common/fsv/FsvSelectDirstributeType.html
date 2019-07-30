@@ -1,0 +1,5 @@
+<select>
+        <option ng-repeat="d in distributeConfigs" value="{{d.value}}" ng-if="d.enable">
+            {{d.label|translate}}
+        </option>
+</select>

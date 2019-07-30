@@ -1,0 +1,711 @@
+@CHARSET "UTF-8";
+/* 设置字体 */
+@font-face {
+    font-family: "LevenimMTRegular";
+    src: url("lvnm.ttf");
+    font-weight: normal;
+    font-style: normal;
+}
+body {
+    font-family: "LevenimMTRegular";
+}
+.navbar-fonsview {
+    background: #3681ba !important;
+    height: 60px;
+}
+.nav-container-fon {
+    padding-top: 10px;
+}
+.nav-fon {
+    height: 60px;
+    padding-top: 0 !important;
+    margin: 0;
+}
+.light-blue {
+    height: 60px !important; 
+    margin-top: -12px;
+    position: relative;
+}
+.user-info {
+    vertical-align: middle !important;
+    line-height: 20px !important;
+    font-size: 15px;
+}
+.caret-down {
+    vertical-align: bottom;
+    padding-bottom: 5px;
+}
+.splitColumn {
+    position: relative;
+    float:left;
+    /* left: 190px; */
+    top: 0;
+    bottom: 0;
+    width: 10px;
+    background: #e0e0e0;
+}
+.breadcrumbs {
+    min-height: 38px;
+    line-height: 38px;
+    /* margin-left: 10px; */
+}
+/* .icon-double-angle-left:before {
+    content: "";
+} */
+.nav-list>li>a {
+    font-size: 15px;
+    font-family: "LevenimMTRegular";
+    color:　#4b5154;
+}
+.nav-list>li.open>a {
+    font-size: 15px;
+    font-family: "LevenimMTRegular";
+    color: #3681ba;
+}
+.nav-list>li .submenu>li>a {
+    font-size: 13px;
+    font-family: "LevenimMTRegular";
+    color: #919191;
+}
+.nav-list>li .submenu>li:active>a {
+    font-size: 13px;
+    font-family: "LevenimMTRegular";
+    color: #3681ba;
+}
+.nav-tabs>li {
+    background-color: white;
+}
+/* addedit */
+.fsw-form .form-control:focus,
+.fsw-form select:focus,
+.fsw-form textarea:focus, 
+.fsw-form input[type="text"]:focus, 
+.fsw-form input[type="password"]:focus,
+.fsw-form input[type="datetime"]:focus, 
+.fsw-form input[type="datetime-local"]:focus, 
+.fsw-form input[type="date"]:focus, 
+.fsw-form input[type="month"]:focus, 
+.fsw-form input[type="time"]:focus, 
+.fsw-form input[type="week"]:focus, 
+.fsw-form input[type="number"]:focus, 
+.fsw-form input[type="email"]:focus, 
+.fsw-form input[type="url"]:focus, 
+.fsw-form input[type="search"]:focus, 
+.fsw-form input[type="tel"]:focus, 
+.fsw-form input[type="color"]:focus{
+    border-color: #2681ba;
+}
+.fsw-multi-row.row{
+    margin-right: 10%;
+}
+.fsw-multi-row .form-group{
+    margin-bottom: 3px;
+}
+.fsw-multi-row input.form-control{
+   
+}
+.fsw-multi-row .form-group>label[class *="col-"]{
+    /* padding-top: 6px; */
+    padding-top: 3px;
+    margin-bottom: 3px;
+}
+.fsw-multi-row tags-input .host{
+    margin: 0;
+}
+.fsw-multi-row .label{
+    font-size: 13px;
+}
+.fsw-multi-row .nav-tabs>li.active>a{
+    border-left-color: #ddd; /*原本颜色#2681ba*/
+    border-right-color: #ddd;
+}
+.fsw-multi-row .tab-content{
+    border-color: #ddd; /*原本颜色#2681ba*/
+}
+.fsw-multi-row .nav-tabs>li {
+    margin-right:5px;
+}
+.fsw-multi-row .nav-tabs>li {
+    margin-right:5px;
+}
+.fsw-group-row.form-group{
+    margin-left: -30px !important;
+    margin-right: -30px !important;
+}
+.fsw-row-half.col-sm-3{
+    width: 12%;
+}
+.fsw-row-half.col-sm-10{
+    width: 87.5%;
+}
+.node-operate-bar {
+    white-space: nowrap;
+    z-index: 999;
+    position: absolute;
+    display: none;
+    box-shadow: rgba(0, 0, 0, 0.172549) 0px 6px 12px;
+    border: 1px solid rgba(0, 0, 0, 0.14902);
+    background-color: rgb(255, 255, 255);
+    margin-left: 12px;
+    margin-top:15px;
+}
+.node-operate-bar-marginLeft-110{
+    margin-left: -110px;
+}
+.node-operate:hover .node-operate-bar {
+    display: block;
+}
+
+.a_style {
+    display: block;
+    height: 22px;
+}
+
+.p_style {
+    margin-top: 8px; color : #2460A2;
+    font-size: 12px;      /*原为2px，在火狐浏览器下字体太小*/
+    display: block;
+    color: #2460A2;
+}
+
+.form-group{
+    margin-bottom: 5px !important; 
+}
+
+/* 分頁 */
+.ngFooterPanel {
+    border-top: 0;
+}
+#treeboxbox_tree .standartTreeRow{
+    height: 100%; 
+    width: 155px;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+/* 最大页框样式 */
+.maxPages{
+    margin-bottom: 0px;
+    vertical-align: top;
+    display:inline-block;
+    margin-top:3px; 
+    padding-right: 4px;
+}
+
+/*
+* scrollbar
+*/
+/* 水平滚动条高度 */
+div ::-webkit-scrollbar {
+    height: 6px;
+    width: 10px;
+}
+/* 滚动条里面部分 */
+div ::-webkit-scrollbar-thumb{
+     background-color:#c0c0c0;
+     -webkit-border-radius: 2em;
+     -moz-border-radius: 2em;
+     border-radius:2em;
+}
+div ::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(169,169,169,0.4); 
+}
+
+
+.nav-list>li>a>[class *="icon-"]:first-child {
+    min-width: 0 !important;
+    
+}
+.nav-list>li>a>[class *="icon-"]:first-child:before, 
+.nav-list>li.open>a>[class *="icon-"]:first-child:before {
+    width: 25px;
+    height: 25px;
+}
+/* about页面 */
+#about_table th{
+    border: 1px solid #dcebf7;
+}
+#about_table td{
+    border: 1px solid #dcebf7;
+    white-space: normal; 
+    vertical-align: middle;
+}
+#about_table .about_table_title{
+    color: #336199;
+    background-color: #edf3f4;
+}
+.panel-group {
+    margin-bottom: 0px;
+}
+
+.gridStyle {
+    border: 1px solid rgb(212, 212, 212);
+    height: 390px;
+}
+
+input[type="file"] {
+    display: inline;
+}
+
+input[readonly] {
+    cursor: pointer !important;
+    background: #FFFFFF !important;
+}
+
+.checkbox {
+    padding-left: 0px !important;
+    padding-right: 5px !important;
+    display: inline !important;
+}
+
+.radio {
+    padding-left: 0px !important;
+    padding-right: 5px !important;
+    display: inline !important;
+}
+
+.widget-toolbar a {
+    cursor: pointer;
+}
+
+.page_index_css {
+    height: 33px !important;
+    padding-top: 2px !important;
+    padding-bottom: 2px !important;
+}
+
+.file-box {
+    position: relative;
+    width: 340px
+}
+
+.file {
+    position: absolute;
+    top: 0;
+    right: 128px;
+    height: 30px;
+    filter: alpha(opacity :     0);
+    opacity: 0;
+    width: 220px
+}
+
+.tdfixed {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.table {
+    cellspacing: 0;
+    margin-bottom: 0px;
+    table-layout: fixed;
+    width: 100%;
+}
+
+.table th {
+    text-align: center;
+}
+
+.table tbody {
+    text-align: center
+}
+
+.table td {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    line-height: 30px;
+}
+
+.dialog_input {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    background: rgba(0, 0, 0, 0.247059);
+    z-index: 1000;
+}
+
+.dialog_input .main {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 100px;
+    width: 445px;
+    height: 240px;
+    background-color: white;
+    border-radius: 12px;
+}
+
+.dialog_input .main .title {
+    width: 100%;
+    height: 30px;
+    padding-top: 5px;
+    padding-left: 15px;
+    font: 20px bold;
+    color: white;
+    background-color: #438eb9;
+    margin: 0 auto;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    vertical-align: middle;
+}
+
+.dialog_input .main .input {
+    width: 430px;
+    margin: 0 auto;
+}
+
+.dialog_input .main .input textarea {
+    margin: 10px auto;
+    height: 145px;
+    border-radius: 8px;
+}
+
+.dialog_input .main .input button {
+    float: right;
+    margin-left: 10px;
+}
+/*ng-grid checkbox列样式*/
+.gridStyle {
+    border: 1px solid rgb(212, 212, 212);
+    height: 300px;
+    text-align: center;
+}
+
+.colt0 {
+    width: 50px !important;
+}
+
+.ngSelectionHeader {
+    left: 11px;
+}
+
+.ngSelectionCell {
+    margin-left: 11px;
+}
+/*设置多选控件的最大高度*/
+.checkboxLayer .checkBoxContainer {
+    max-height: 200px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+.categoryvalue .tag-list .tag-item a {
+    visibility: hidden;
+}
+
+.loading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    padding-top: 50%;
+    text-align: center;
+    z-index: 1039;
+    width: 100%;
+    height: 100%;
+    display: none;
+}
+
+.ui-datepicker {
+    z-index: 1051 !important;
+}
+
+.ico-add {
+    background-image: url(../img/tool/icon_+.png);
+    background-color: #82af6f;
+}
+
+.ico-edit {
+    background-image: url(../img/tool/icon_edit.png);
+}
+
+.ico-delete {
+    background-image: url(../img/tool/icon_delete.png);
+}
+
+.ico-retry {
+    background-image: url(../img/tool/icon_reset.png);
+}
+
+.ico-import {
+    background-image: url(../img/tool/icon_import.png);
+}
+
+.ico-export {
+    background-image: url(../img/tool/icon_export.png);
+}
+
+.ico-publish {
+    background-image: url(../img/tool/online.png);
+}
+
+.ico-submit {
+    background-image: url(../img/tool/online.png);
+}
+
+.ico-cancel {
+    background-image: url(../img/tool/offline.png);
+}
+
+.ico-associate {
+    background-image: url(../img/tool/offline.png);
+}
+
+.ico-review {
+    background-image: url(../img/tool/online.png);
+}
+
+.ico-search {
+    background-image: url(../img/tool/button_search.png);
+}
+
+.ico-reset {
+    background-image: url(../img/tool/icon_reset.png);
+}
+
+.ico-schedule {
+    background-image: url(../img/tool/icon_reset.png);
+}
+
+.icon-desktop:before {
+    content: url("../img/tool/icon_desktop.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-desktop {
+    content: url("../img/tool/icon_desktop_open.png") !important;
+}
+
+.nav>li>a:hover .icon-desktop,.nav>li>a:focus .icon-desktop {
+    content: url("../img/tool/icon_desktop_open.png") !important;
+}
+
+.icon-facetime-video:before {
+    content: url("../img/tool/icon_vod.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-facetime-video {
+    content: url("../img/tool/icon_vod_open.png") !important;
+}
+
+.nav>li>a:hover .icon-facetime-video,.nav>li>a:focus .icon-facetime-video
+{
+    content: url("../img/tool/icon_vod_open.png") !important;
+}
+
+.icon-camera-retro:before {
+    content: url("../img/tool/icon_game.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-camera-retro {
+    content: url("../img/tool/icon_game_open.png") !important;
+}
+
+.nav>li>a:hover .icon-camera-retro,.nav>li>a:focus .icon-camera-retro {
+    content: url("../img/tool/icon_game_open.png") !important;
+}
+
+.icon-reorder:before {
+    content: url("../img/tool/icon_mixcategory.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-reorder {
+    content: url("../img/tool/icon_mixcategory_open.png") !important;
+}
+
+.nav>li>a:hover .icon-reorder,.nav>li>a:focus .icon-reorder {
+    content: url("../img/tool/icon_mixcategory_open.png") !important;
+}
+
+.icon-rss:before {
+    content: url("../img/tool/icon_radio.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-rss {
+    content: url("../img/tool/icon_radio_open.png") !important;
+}
+
+.nav>li>a:hover .icon-rss,.nav>li>a:focus .icon-rss {
+    content: url("../img/tool/icon_radio_open.png") !important;
+}
+
+.icon-camera:before {
+    content: url("../img/tool/icon_app.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-camera {
+    content: url("../img/tool/icon_app_open.png") !important;
+}
+
+.nav>li>a:hover .icon-camera,.nav>li>a:focus .icon-camera {
+    content: url("../img/tool/icon_app_open.png") !important;
+}
+
+.icon-title:before {
+    content: url("../img/tool/icon_title.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-title {
+    content: url("../img/tool/icon_title_open.png") !important;
+}
+
+.nav>li>a:hover .icon-title,.nav>li>a:focus .icon-title {
+    content: url("../img/tool/icon_title_open.png") !important;
+}
+
+.icon-send:before {
+    content: url("../img/tool/icon_send.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-send {
+    content: url("../img/tool/icon_send_open.png") !important;
+}
+
+.nav>li>a:hover .icon-send,.nav>li>a:focus .icon-send {
+    content: url("../img/tool/icon_send_open.png") !important;
+}
+
+.icon-accept:before {
+    content: url("../img/tool/icon_accept.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-accept {
+    content: url("../img/tool/icon_accept_open.png") !important;
+}
+
+.nav>li>a:hover .icon-accept,.nav>li>a:focus .icon-accept {
+    content: url("../img/tool/icon_accept_open.png") !important;
+}
+
+.icon-th-large:before {
+    content: url("../img/tool/icon_service.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-th-large {
+    content: url("../img/tool/icon_service_open.png") !important;
+}
+
+.nav>li>a:hover .icon-th-large,.nav>li>a:focus .icon-th-large {
+    content: url("../img/tool/icon_service_open.png") !important;
+}
+
+.icon-heart:before {
+    content: url("../img/tool/icon_ad.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-heart {
+    content: url("../img/tool/icon_ad_open.png") !important;
+}
+
+.nav>li>a:hover .icon-heart,.nav>li>a:focus .icon-heart {
+    content: url("../img/tool/icon_ad_open.png") !important;
+}
+
+.icon-list:before {
+    content: url("../img/tool/icon_list.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-list {
+    content: url("../img/tool/icon_list_open.png") !important;
+}
+
+.nav>li>a:hover .icon-list,.nav>li>a:focus .icon-list {
+    content: url("../img/tool/icon_list_open.png") !important;
+}
+
+.icon-github-alt:before {
+    content: url("../img/tool/icon_github-alt.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-github-alt {
+    content: url("../img/tool/icon_github-alt_open.png") !important;
+}
+
+.nav>li>a:hover .icon-github-alt,.nav>li>a:focus .icon-github-alt {
+    content: url("../img/tool/icon_github-alt_open.png") !important;
+}
+
+.icon-word:before {
+    content: url("../img/tool/icon_word.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-word {
+    content: url("../img/tool/icon_word_open.png") !important;
+}
+
+.nav>li>a:hover .icon-word,.nav>li>a:focus .icon-word {
+    content: url("../img/tool/icon_word_open.png") !important;
+}
+
+.icon-bolt:before {
+    content: url("../img/tool/icon_bolt.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-bolt {
+    content: url("../img/tool/icon_bolt_open.png") !important;
+}
+
+.nav>li>a:hover .icon-bolt,.nav>li>a:focus .icon-bolt {
+    content: url("../img/tool/icon_bolt_open.png") !important;
+}
+
+.icon-file:before {
+    content: url("../img/tool/icon_file.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-file {
+    content: url("../img/tool/icon_file_open.png") !important;
+}
+
+.nav>li>a:hover .icon-file,.nav>li>a:focus .icon-file {
+    content: url("../img/tool/icon_file_open.png") !important;
+}
+
+.icon-homepage:before {
+    content: url("../img/tool/icon_homepage.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-homepage {
+    content: url("../img/tool/icon_homepage_open.png") !important;
+}
+
+.nav>li>a:hover .icon-homepage,.nav>li>a:focus .icon-homepage {
+    content: url("../img/tool/icon_homepage_open.png") !important;
+}
+
+.icon-cogs:before {
+    content: url("../img/tool/icon_cogs.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-cogs {
+    content: url("../img/tool/icon_cogs_open.png") !important;
+}
+
+.nav>li>a:hover .icon-cogs,.nav>li>a:focus .icon-cogs {
+    content: url("../img/tool/icon_cogs_open.png") !important;
+}
+
+.icon-basicdata:before {
+    content: url("../img/tool/icon_basicdata.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-basicdata {
+    content: url("../img/tool/icon_basicdata_open.png") !important;
+}
+
+.nav>li>a:hover .icon-basicdata,.nav>li>a:focus .icon-basicdata {
+    content: url("../img/tool/icon_basicdata_open.png") !important;
+}
+
+.icon-check:before {
+    content: url("../img/tool/icon_check.png") !important;
+}
+
+.nav-list>li.open>a>i.icon-check {
+    content: url("../img/tool/icon_check_open.png") !important;
+}
+
+.nav>li>a:hover .icon-check,.nav>li>a:focus .icon-check {
+    content: url("../img/tool/icon_check_open.png") !important;
+}

@@ -1,0 +1,88 @@
+server:
+  port: 9000
+spring: 
+  application:
+    name: apigetway
+  redis: 
+    host: 127.0.0.1
+    port: 6379
+  cloud: 
+    config:
+      profile: dev 
+      label: master
+      discovery:
+        enabled: true
+        service-id:  config-server
+  rabbitmq: 
+    host: localhost
+    port: 5672
+    username: hoob
+    password: zhuqinhe
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 30 #eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）默认30 ，生成环境不建议修改
+zuul:
+#微服务路由配置
+  #ignoredServices: '*'  #暴力忽略所有的微服务代理，只有在下面配置了才代理
+  routes:
+    #microservice-favorite: /favorite/**  #配置代理映射收藏微服务的路由
+    #microservice-bookmark: /bookmark/**  #配置代理映射书签微服务的路由
+    #microservice-comment: /comment/**  #配置代理映射点评微服务的路由
+    #microservice-reminder: /reminder/**  #配置代理映射提醒服务的路由
+    #microservice-sync-data: /sync/data/**  #配置代理映射提醒服务的路由
+    favorite: 
+      path: /favorite/**
+      serviceId: favorite
+    bookmark: 
+      path: /bookmark/**
+      serviceId: bookmark
+    comment: 
+      path: /comment/**
+      serviceId: comment
+    reminder: 
+      path: /reminder/**
+      serviceId: reminder
+    sync-data: 
+      path: /sync/data/**
+      serviceId: syncdata
+    metadata: 
+      path: /metadata/**
+      serviceId: metadata
+    search: 
+      path: /search/**
+      serviceId: search
+      
+#zuul  限流配置    
+  ratelimit:
+    enabled: true
+    repository: redis
+    default-policy: #默认的流控策略   所有服务在3秒内只能有1次请求且所有请求时间总和不得超过2秒
+      limit: 1
+      quota: 2
+      refresh-interval: 3
+      type: url
+    policies:
+      favorite: # microservice-favorite 的流控策略   所有服务在60秒内只能有10次请求且所有请求时间总和不得超过20秒
+        limit: 10
+        quota: 20
+        refresh-interval: 60
+        type: url
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 3000
+ribbon:
+  ConnectTimeout: 1000
+  ReadTimeout: 1000    
+# 服务薇自定义配置  
+customize:
+  config:
+    verifyHMAC: 0

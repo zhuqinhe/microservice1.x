@@ -1,0 +1,41 @@
+server:
+  port: 8080
+spring: 
+  application:
+    name: microservice-test
+logging:
+  level:
+    root: INFO
+    com.test: DEBUG
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://hoob:zhuqinhe@localhost:8761/eureka
+  instance:
+    prefer-ip-address: true
+    instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${spring.application.instance_id:${server.port}}
+    lease-renewal-interval-in-seconds: 10 #eureka客户端需要向eureka服务器发送心跳以指示它仍然存在的频率（以秒为单位）默认30 ，生成环境不建议修改    
+management:
+  security: 
+    enabled: false
+  endpoints:
+    web:
+       exposure: 
+         include: hystrix.stream    
+microservice-favorite: #收藏微服务选用轮训的负载均衡方式
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule  
+microservice-bookmark: #书签微服务负载均衡方式
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+microservice-comment: #点评微服务负载均衡方式
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+microservice-reminder: #提醒微服务负载均衡方式
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule  
+microservice-sync-data: #提醒微服务负载均衡方式
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule      

@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+.nav-tabs>li>a.ufocus {
+	padding-top: 10px !important;
+}
+.wid-focus-header {
+	background: #f2f2f2 !important; 
+	border-bottom: 0 !important;
+	color: #576373  !important;
+}

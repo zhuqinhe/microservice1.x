@@ -1,0 +1,77 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><a href="#/security/user/list/0">{{'user'|translate}}</a></li>
+		<li class="active">{{'detaillist'|translate}}</li>
+	</ul>
+</div>
+
+<div class="page-content">
+	<div class="row">
+		<div class="col-xs-12">
+			<!-- PAGE CONTENT BEGINS -->
+			<div style="padding: 10px; border: 1px solid #c5d0dc;">
+				<!-- 加框 -->
+				<table style="width: 100%;">
+					<div class="movName">{{data.name}}</div>
+					<tbody>
+						<tr>
+							<td class="td1">{{'user'|translate}}ID:</td>
+							<td class="td2">{{data.id}}</td>
+							<td class="td1">{{'username'|translate}}:</td>
+							<td class="td2">{{data.userId}}</td>
+						</tr>
+						<tr>
+							<td class="td1">{{'userType'|translate}}:</td>
+							<td class="td2"><span ng-show="data.userType == 'sysadmin'">{{'sysadmin'|translate}}</span>
+								<span ng-show="data.userType == 'admin'">{{'admin'|translate}}</span>
+								<span ng-show="data.userType == 'user'">{{'generalUser'|translate}}</span>
+							</td>
+							<td class="td1">{{'enable'|translate}}:</td>
+							<td class="td2"><span ng-show="data.enable==false">{{'no'|translate}}
+							</span> <span ng-show="data.enable==true">{{'yes'|translate}}</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td1">{{'bind'|translate}}IP:</td>
+							<td class="td2"><span ng-if="data.enableIPBinding==false">{{'no'|translate}}</span>
+								<span ng-if="data.enableIPBinding==true">{{'yes'|translate}}</span>
+							</td>
+						</tr>
+						<tr>
+							<td class="td1">{{'createTime'|translate}}:</td>
+							<td class="td2">{{data.createTime|date:'yyyy-MM-dd
+								HH:mm:ss'}}</td>
+							<td class="td1">{{'lastlogintime'|translate}}:</td>
+							<td class="td2">{{data.lastLoginTime|date:'yyyy-MM-dd
+								HH:mm:ss'}}</td>
+						</tr>
+						<tr>
+							<td class="td1">{{'parentUser'|translate}}:</td>
+							<td class="td2">{{data.parentUserId}}</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<form class="form-horizontal" role="form" name="add_form">
+
+
+				<div class="clearfix form-actions">
+					<div style="text-align: center;">
+						<a class="btn btn-info" type="reset" ng-click="returnLastPage()">
+							<!-- href="#/taskHistory/list/0/0"--> <img
+							src="img/tool/icon_return.png"></img> {{'return'|translate}}
+						</a>
+					</div>
+				</div>
+
+			</form>
+		</div>
+	</div>
+</div>

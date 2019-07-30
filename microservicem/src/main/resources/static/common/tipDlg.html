@@ -1,0 +1,17 @@
+<div>
+	<div class="ngdialog-header center">
+		<p>{{'msg'|translate}}</p>
+	</div>
+	<div class="ngdialog-message center">
+	   <p class="bigger-110 bolder center grey btn-fsw-mes">{{message}}</p>
+	   <p ng-if="message2" class="bigger-110 bolder center grey btn-fsw-mes">{{message2}}</p>
+	   <p ng-if="message3" class="bigger-110 bolder center grey btn-fsw-mes">{{message3}}</p>
+	</div>
+	<div class="ngdialog-buttons center">
+		<button type="button" class="btn btn-tool btn-xs bigger-110" style="outline: none;"
+			ng-click="confirm('Save')">
+			<img src="img/btn_icon_ok.png"></img>
+			{{'ok'|translate}}
+		</button>
+	</div>
+</div>

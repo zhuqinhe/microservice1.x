@@ -1,0 +1,210 @@
+<style type="text/css">
+.nav-tabs>li>a {
+	padding-top: 15px !important;
+}
+</style>
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+	<ul class="breadcrumb">
+		<li><a href="#/sys/sysconfig/list/0">{{'sysConfig'|translate}}</a></li>
+		<li class="active">{{'edit'|translate}}</li>
+	</ul>
+</div>
+
+<div class="col-sm-6">
+	<div id="json-error" class="hide">
+		<p class="bigger-110 bolder center red">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'json数据格式错误'|translate}}！
+		</p>
+	</div>
+</div>
+<div class="col-sm-6">
+	<div id="dialog-fail" class="hide">
+		<p class="bigger-110 bolder center red">
+			<i class="icon-hand-right blue bigger-120"></i>
+			{{'saveFail'|translate}}!
+		</p>
+	</div>
+</div>
+<!-- .breadcrumb -->
+
+<div class="page-content">
+	<div class="space-6"></div>
+	<div class="hr hr-dotted hr18"></div>
+	<div class="space-6"></div>
+	<div class="row">
+		<div class="col-xs-12 no-border" style="margin-top: 10px;">
+			<ul class="nav nav-tabs">
+				<li ng-class="manFlag==2?'active':''" class="ng-isolate-scope"
+					id="config"><a href="" class="ng-binding"
+					ng-click="changeManagePage(2);"> <tab-heading
+							class="ng-binding ng-scope">
+						{{'systemParam'|translate}} </tab-heading>
+				</a></li>
+			</ul>
+			<!-- 系统参数配置 -->
+			<div class="table-responsive" ng-if="manFlag==2">
+				<table style="margin-bottom: 0"
+					class="table table-striped table-bordered table-hover"
+					colresizeable>
+					<thead>
+						<tr ng-click="col='key';desc=!desc">
+							<th style="width: 4%;">{{'orderNum'|translate}}</th>
+							<th style="width: 16%;">{{'configKey'|translate}}</th>
+							<th style="width: 40%;">{{'configContent'|translate}}</th>
+							<!-- 	<th style="width: 18%;">{{'description'|translate}}</th> -->
+							<th style="width: 16%;">{{'configName'|translate}}</th>
+							<th style="width: 10%;">{{'enable'|translate}}</th>
+							<th style="width: 10%;">{{'operation'|translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="cfg in items | orderBy:col:desc">
+							<td><span>{{cfg.id}}</span></td>
+							<td><span>{{cfg.key}}</span></td>
+							<td><span>{{cfg.value}}</span></td>
+							<!-- <td><span>{{cfg.desc|translate}}</span></td> -->
+							<!--目前配置名称和描述保持一致-->
+							<td><span>{{cfg.name}}</span></td>
+							<td><input type="checkbox"
+								ng-checked="cfg.enable==1?true:false" ng-model="cfg.enable"
+								id="enableChckbox_{{cfg.id}}"
+								ng-click="startStopConfig(cfg, $event);"
+								class="ace ace-switch ace-switch-5" /><span class="lbl"></span>
+							</td>
+							<td><span class="btn btn-primary btn-xs pull-center"
+								title="编辑内容" ng-click="toContentEdit(cfg);"> <i
+									class="glyphicon glyphicon-edit"></i>
+							</span> <!--  <span class="btn btn-primary btn-xs pull-center" title="删除内容"
+								ng-click="deleteConfig(cfg.id);"> <i
+									class="glyphicon glyphicon-trash"></i>
+							</span>--></td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-grid-footer="" class="ng-scope">
+					<!-- /.page-header -->
+					<div class="btn-group" style="height: 50px;">
+						<!--  <a class="btn btn-default btn-tool"
+							href="#/sysconfig/content/edit/0"
+							style="background-image: url(img/tool/icon_+.png); background-color: #82af6f;">{{'add'|translate}}</a>-->
+						<a class="btn btn-default btn-tool " ng-click="refresh()"
+							style="background-image: url(img/tool/icon_retry.png); background-color: #82af6f;">{{'refreshCache'|translate}}</a>
+					</div>
+				</div>
+			</div>
+			<!-- 系统常量配置 -->
+			<div class="table-responsive" ng-if="manFlag==3">
+				<table style="margin-bottom: 0"
+					class="table table-striped table-bordered table-hover"
+					colresizeable>
+					<thead>
+						<tr ng-click="col='key';desc=!desc">
+							<th style="width: 4%;">{{'orderNum'|translate}}</th>
+							<th style="width: 16%;">{{'configKey'|translate}}</th>
+							<th style="width: 40%;">{{'configContent'|translate}}</th>
+							<!-- 	<th style="width: 18%;">{{'description'|translate}}</th> -->
+							<th style="width: 16%;">{{'configName'|translate}}</th>
+							<th style="width: 10%;">{{'enable'|translate}}</th>
+							<th style="width: 10%;">{{'operation'|translate}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr ng-repeat="cfg in items | orderBy:col:desc">
+							<td><span>{{cfg.id}}</span></td>
+							<td><span>{{cfg.key}}</span></td>
+							<td><span>{{cfg.value}}</span></td>
+							<!-- <td><span>{{cfg.desc|translate}}</span></td> -->
+							<!--目前配置名称和描述保持一致-->
+							<td><span>{{cfg.name}}</span></td>
+							<td><input type="checkbox"
+								ng-checked="cfg.enable==1?true:false" ng-model="cfg.enable"
+								id="enableChckbox_{{cfg.id}}"
+								ng-click="startStopConfig(cfg, $event);"
+								class="ace ace-switch ace-switch-5" /><span class="lbl"></span>
+							</td>
+							<td><span class="btn btn-primary btn-xs pull-center"
+								title="编辑内容" ng-click="toContentEdit(cfg);"> <i
+									class="glyphicon glyphicon-edit"></i>
+							</span> <!--  <span class="btn btn-primary btn-xs pull-center" title="删除内容"
+								ng-click="deleteConfig(cfg.id);"> <i
+									class="glyphicon glyphicon-trash"></i>
+							</span>--></td>
+						</tr>
+					</tbody>
+				</table>
+				<div ng-grid-footer="" class="ng-scope">
+					<!-- /.page-header -->
+					<div class="btn-group" style="height: 50px;">
+						<!--  <a class="btn btn-default btn-tool"
+							href="#/sysconfig/content/edit/0"
+							style="background-image: url(img/tool/icon_+.png); background-color: #82af6f;">{{'add'|translate}}</a>-->
+						<a class="btn btn-default btn-tool " ng-click="refresh()"
+							style="background-image: url(img/tool/icon_retry.png); background-color: #82af6f;">{{'refreshCache'|translate}}</a>
+					</div>
+				</div>
+			</div>
+			<div class="table-responsive" ng-if="manFlag==4">
+				<div class="col-xs-12">
+					<form class="form-horizontal" role="form" name="filter_form"
+						novalidate>
+						<div class="form-group"></div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label no-padding-right">{{'login_logo'|translate}}:</label>
+							<div class="col-sm-2" style="text-align: center;">
+								<!-- data-toggle="modal" data-target="#editModal" -->
+								<img
+									style="width: 120px; height: 120px; vertical-align: baseline"
+									id="login_logo" ng-src="{{login_logo||'img/add_image.png'}}"
+									ng-click="openFileDlg($event)" />
+							</div>
+							<label class="col-sm-6 no-padding-left" style="text-align: left"><font
+								color="red">{{'resolution:55*55'|translate}}</font></label>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-4 control-label no-padding-right">{{'system_logo'|translate}}:</label>
+							<div class="col-sm-2" style="text-align: center;">
+								<!-- data-toggle="modal" data-target="#editModal" -->
+								<img style="width: 120px; height: 120px;" id="system_logo"
+									ng-src="{{system_logo||'img/add_image.png'}}"
+									ng-click="openFileDlg($event)" />
+							</div>
+							<label class="col-sm-6 no-padding-left" style="text-align: left"><font
+								color="red">{{'resolution:160*36'|translate}}</font></label>
+						</div>
+
+
+						<div class="clearfix form-actions fsw-form-actions">
+							<div style="text-align: center;">
+								<button class="btn btn-success btn-tool btn-fon" type="button"
+									ng-click="saveLogo()"
+									ng-disabled="add_form.$invalid||repeatCode">
+									<i class="icon-ok bigger-110"></i> {{'submit'|translate}}
+								</button>
+							</div>
+						</div>
+					</form>
+
+				</div>
+			</div>
+
+			<div class="table-responsive" ng-if="manFlag==5">
+				<div class="col-xs-12">
+					<div class="clearfix form-actions fsw-form-actions">
+							<div style="text-align: center;">
+								<button class="btn btn-success btn-tool btn-fon" type="button" ng-if="rootPris.sysmanage_cache_clean" ng-click="clean()">
+									<i class="icon-ok bigger-110"></i> {{'cleanCache'|translate}}
+								</button>
+							</div>
+				   </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

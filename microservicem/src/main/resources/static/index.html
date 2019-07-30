@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp" ng-cloak>
+
+<head>
+    <meta charset="utf-8"/>
+    <META http-equiv="Expires" content="0">
+    <META http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <META http-equiv="Pragma" content="no-cache">
+    <title translate='cms_management'></title>
+    <link rel="shortcut icon" href="img/icon_logo.png">
+    <!-- basic styles -->
+
+    <link href="plugin/bootstrap/css/bootstrap.min.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="plugin/ace/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/jquery-ui-1.10.3.full.min.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/ui.jqgrid.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/chosen.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/font.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/ace.min.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/ace-rtl.min.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/ace-skins.min.css"/>
+    <link rel="stylesheet" href="plugin/ace/css/daterangepicker.css"/>
+
+    <link rel="stylesheet" href="plugin/ng-grid/ng-grid.min.css"/>
+    <link rel="stylesheet" href="plugin/ng-tags-input/ng-tags-input.min.css"/>
+    <link rel="stylesheet" href="plugin/angular-multi-select/angular-multi-select.css"/>
+    <link rel="stylesheet" href="plugin/jquery-timepicker-addon/dist/jquery-ui-timepicker-addon.min.css"/>
+    <link rel="stylesheet" href="plugin/angular-ui-select/dist/select.min.css"/>
+    <link rel="stylesheet" href="plugin/angular-ui-select/dist/select2.css">
+    <link href="plugin/bootstrap/css/bootstrap-switch.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="plugin/ng-dialog/css/ngDialog.css">
+    <link rel="stylesheet" href="plugin/ng-dialog/css/ngDialog-theme-default.css">
+    <!--dhtmlx-->
+    <link rel="stylesheet" type="text/css" href="plugin/ace/js/dhtmlx/dhtmlxtree.css">
+    <!-- Custom common css -->
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/common-search.css">
+    <link rel="stylesheet" href="css/add-edit.css">
+    <link rel="stylesheet" href="css/focus.css">
+    <link rel="stylesheet" href="css/commonDlg.css">
+    <link rel="stylesheet" href="css/error.css">
+    <!-- colorpicker -->
+    <link rel="stylesheet" href="plugin/colorpicker/color-picker.min.css"/>
+    <script>
+        (function () {
+            localStorage.setItem('getSessionStorage', Date.now());
+            // 该事件是核心
+            window.addEventListener('storage', function (event) {
+                if (event.key == 'sessionStorage') {
+                    // 新开启的标签页会收到这个事件
+                    var data = JSON.parse(event.newValue);
+                    for (var key in data) {
+                        sessionStorage.setItem(key, data[key]);
+                    }
+                } else if (event.key == 'getSessionStorage' && sessionStorage.length > 1) {
+                    // 已存在的标签页会收到这个事件
+                    if (sessionStorage.getItem("login") == "true") {
+                        localStorage.setItem('sessionStorage', JSON.stringify(sessionStorage));
+                        localStorage.removeItem('sessionStorage');
+                    }
+                } else if (event.key == 'exit') {
+                    sessionStorage.setItem("token", "");
+                    sessionStorage.setItem("login", false);
+                }
+            });
+        })();
+    </script>
+    <script src="plugin/ace/js/dhtmlx/dhtmlxcommon.js"></script>
+    <script src="plugin/ace/js/dhtmlx/dhtmlxtree.js"></script>
+    <script src="plugin/ace/js/dhtmlx/ext/dhtmlxtree_json.js"></script>
+
+    <!-- ace settings handler -->
+    <script src="plugin/jquery/js/jquery.min.js"></script>
+    <script src="plugin/bootstrap/js/bootstrap.min.js"></script>
+    <script src="plugin/ng-file-upload/angular-file-upload-shim.min.js"></script>
+    <script src="plugin/angular/angular.min.js"></script>
+    <script src="plugin/ng-file-upload/angular-file-upload.min.js"></script>
+    <script src="plugin/angular/angular-sanitize.js"></script>
+    <script src="plugin/angular-route/angular-route.min.js"></script>
+    <script src="plugin/bootstrap/js/ui-bootstrap-tpls-0.11.0.js"></script>
+    <script src="plugin/ng-grid/ng-grid-2.0.11.min.js"></script>
+    <script src="plugin/ng-tags-input/ng-tags-input.min.js"></script>
+    <script src="plugin/angular-multi-select/angular-multi-select.js"></script>
+    <script src="plugin/fuelux/fuelux.tree.min.js"></script>
+    <script src="plugin/angular-resource/angular-resource.js"></script>
+    <script src="plugin/moment/moment.min.js"></script>
+    <script src="plugin/angular-ui-select/dist/select.min.js"></script>
+    <script src="plugin/angular-translate/angular-translate.min.js"></script>
+    <script src="plugin/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+    <script src="plugin/angular-cookies/angular-cookies.min.js"></script>
+    <script src="plugin/ng-dialog/ngDialog.js"></script>
+    <script src="plugin/ace/js/jquery/jquery-colResizable-1.5.min.js"></script>
+    <script src="plugin/crypto-js/core.js"></script>
+    <script src="plugin/crypto-js/enc-base64.js"></script>
+    <script src="plugin/crypto-js/hmac.js"></script>
+    <script src="plugin/crypto-js/md5.js"></script>
+    <script src="plugin/crypto-js/sha256.js"></script>
+    <script src="plugin/zeroclipboard/ZeroClipboard.js"></script>
+    <script src="plugin/jsImport/jsImport.js"></script>
+    <script src="plugin/ace/js/typeahead-bs2.min.js"></script>
+    <!-- page specific plugin scripts -->
+    <script src="plugin/ace/js/jquery/jquery-ui-1.10.3.full.min.js"></script>
+    <script src="plugin/jquery-timepicker-addon/dist/jquery-ui-timepicker-addon.min.js"></script>
+    <script src="plugin/jquery-timepicker-addon/dist/i18n/jquery-ui-timepicker-addon-i18n.min.js"></script>
+    <script src="plugin/jquery-timepicker-addon/dist/jquery-ui-sliderAccess.js"></script>
+    <!-- colorpicker -->
+    <script src="plugin/colorpicker/color-picker.min.js"></script>
+    <script src="plugin/ace/js/jquery/jquery.form.js"></script>
+    <!-- ace scripts -->
+    <script src="plugin/ace/js/ace/ace-extra.min.js"></script>
+    <script src="plugin/ace/js/ace/ace-elements.min.js"></script>
+    <script src="plugin/ace/js/ace/ace.min.js"></script>
+    <script src="plugin/ace/js/chosen.jquery.min.js"></script>
+    <script src="plugin/ace/js/jquery.maskedinput.min.js"></script>
+    <script src="plugin/ace/js/date-time/daterangepicker.min.js"></script>
+    <script src="plugin/ace/js/jqGrid/jquery.jqGrid.min.js"></script>
+    <script src="plugin/ace/js/jqGrid/i18n/grid.locale-en.js"></script>
+    <script src="plugin/bootstrap/js/bootstrap-switch.min.js"></script>
+
+    <!--  <script src="plugin/ace/js/x-editable/ace-editable.min.js"></script>
+     <script src="plugin/ace/js/x-editable/bootstrap-editable.min.js"></script> -->
+
+    <!-- echarts -->
+    <script src="plugin/echarts/echarts.min.js"></script>
+
+    <script src="js/PinYin.js?a=${prefix.revision}1"></script>
+    <script src="js/controllers.js?a=${prefix.revision}1"></script>
+    <script src="js/directives.js?a=${prefix.revision}1"></script>
+    <script src="js/filters.js?a=${prefix.revision}1"></script>
+    <script src="js/services.js?a=${prefix.revision}1"></script>
+    <script src="js/jquery_ajax_filter.js?a=${prefix.revision}1"></script>
+    <script src="common/contentImport/controllers_contentimport.js?a=${prefix.revision}1"></script>
+    <script src="js/factory.js?a=${prefix.revision}1"></script>
+
+    <script src="common/atPagination/js/atPaginationDirective.js?a=${prefix.revision}1"></script>
+    <script src="common/associatedContentModal/associatedContentModal.js?a=${prefix.revision}1"></script>
+
+    <!--各模块控制器导入-->
+    <script src="modules/security/index.js?a=${prefix.revision}1"></script>
+    <!--系统管理模块-->
+    <script src="modules/systemManagement/index.js?a=${prefix.revision}1"></script>
+    <!--用户数据-->
+    <script src="modules/userdata/index.js?a=${prefix.revision}1"></script>
+
+
+    <script src="js/app.js?a=${prefix.revision}1"></script>
+    <script src="common/addPic/addPicCtrl.js?a=${prefix.revision}1"></script>
+    <script src="common/retry/retryController.js?a=${prefix.revision}1"></script>
+    <script src="common/labels/labelsController.js?a=${prefix.revision}1"></script>
+    <script src="common/selectMovie/selectMovieCtrl.js?a=${prefix.revision}1"></script>
+    <script src="common/selectMovie/oneKeyShutdownCtrl.js?a=${prefix.revision}1"></script>
+    <script src="common/fsv/js/index.js?a=${prefix.revision}1"></script>
+</head>
+
+<body id="body" ng-controller="indexCtrl">
+<div class="navbar navbar-default navbar-fonsview" id="navbar">
+    <div class="navbar-container nav-container-fon" id="navbar-container">
+        <div class="navbar-header pull-left ; ">
+            <img height="36px" width="160px" ng-src="{{system_logo}}">
+        </div>
+        <div class="navbar-header pull-mid" style="padding-left: 17px;">
+            <a href="#/focus/warninfo" class="navbar-brand" ng-show="!isSysadmin()" onclick="setActiveClass(event);">
+                <small translate='cms_management'>
+                    <i class="icon-leaf"></i>
+                </small>
+            </a>
+            <a href="#" class="navbar-brand" ng-show="isSysadmin()">
+                <small translate='cms_management'>
+                    <i class="icon-leaf"></i>
+                </small>
+            </a>
+        </div>
+        <!-- /.navbar-header -->
+        <div class="navbar-header pull-right" role="navigation">
+            <ul class="nav ace-nav nav-fon">
+                <li class="light-blue">
+                    <a data-toggle="dropdown" class="dropdown-toggle" style="background: #2f72a5;">
+                        <span class="user-info">{{'languagesettings'|translate}} </span>
+                        <img src="img/nav/icon_arrow_down.png" class="caret-down">
+                    </a>
+                    <ul class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a ng-click="changeLanguage(lang1)">
+                                <i class="icon-globe"></i>{{lang11+''|translate}}</a>
+                        </li>
+
+                        <li>
+                            <a ng-click="changeLanguage(lang2)">
+                                <i class="icon-globe"></i>{{lang22+''|translate}}</a>
+                        </li>
+                    </ul>
+                </li>
+                <li class="light-blue">
+                    <a data-toggle="dropdown" class="dropdown-toggle" style="background: #2f72a5;">
+                            <span class="user-info" title="{{user}}" ng-if="language!='en-us'">
+                                <small translate='welcome'></small>{{user}}
+                            </span>
+                        <span class="user-info" title="{{user}}" ng-if="language=='en-us'">
+                                <small translate='settings'></small>
+                            </span>
+                        <img src="img/nav/icon_arrow_down.png" class="caret-down">
+                    </a>
+                    <ul style="z-index: 10000;"
+                        class="user-menu pull-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+                        <li>
+                            <a ng-click="showVersion()">
+                                <i class="icon-cog"></i>{{'about'|translate}}
+                            </a>
+                        </li>
+
+                        <li class="divider"></li>
+
+                        <li>
+                            <a ng-click="showInformation()">
+                                <i class="icon-user"></i>{{'information'|translate}}</a>
+                        <li>
+                            <a ng-click="exit()">
+                                <i class="icon-off"></i>{{'exit'|translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.ace-nav -->
+        </div>
+        <!-- /.navbar-header -->
+    </div>
+    <!-- /.container -->
+</div>
+
+<div class="main-container" id="main-container">
+    <div class="main-container-inner">
+        <a class="menu-toggler" id="menu-toggler" href="#">
+            <span class="menu-text"></span>
+        </a>
+
+        <div class="sidebar" id="sidebar">
+            <ul class="nav nav-list">
+                <!-- ng-if="userType=='admin' " -->
+                <li>
+                    <a href="#" class="dropdown-toggle">
+                        <i class="icon-user "></i>
+                        <span class="menu-text "> {{'Subscriber Data Management'|translate}} </span>
+                        <b class="arrow icon-angle-down "></b>
+                    </a>
+                    <ul class="submenu ">
+                        <li >
+                            <a href="#/userdata/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'user'|translate}}
+                            </a>
+                        </li>
+                        <li >
+                            <a href="#/bookmark/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'bookmark'|translate}}
+                            </a>
+                        </li>
+                        <li >
+                            <a href="#/favorite/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'favorite'|translate}}
+                            </a>
+                        </li>
+                        <li >
+                            <a href="#/score/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'score'|translate}}
+                            </a>
+                        </li>
+                         <li >
+                            <a href="#/av/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'trample'|translate}}
+                            </a>
+                        </li>
+                         <li >
+                            <a href="#/comment/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'comment'|translate}}
+                            </a>
+                        </li>
+                         <li >
+                            <a href="#/reminder/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i> {{'reminder'|translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li ng-if="rootPris=='sysadmin'">
+                    <a href="#" class="dropdown-toggle">
+                        <!-- ng-if="userType=='admin' && rootPris.sysmanage_m || userType=='sysadmin' " -->
+                        <i class="icon-gears "></i>
+                        <span class="menu-text ">
+                                {{'systemManage'|translate}} </span>
+                        <b class="arrow icon-angle-down "></b>
+                    </a>
+                    <ul class="submenu">
+                        <li ng-if="rootPris=='sysadmin'||rootPris=='admin'">
+                            <a href="#/security/user/list/0" onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i>{{'System User'|translate}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/sys/sysconfig/list/2" class="dropdown-toggle" ng-show="true"
+                               onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i>{{'sysConfig'|translate}}
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#/sys/schedulejob/list" class="dropdown-toggle" ng-show="true"
+                               onclick="setActiveClass(event); ">
+                                <i class="icon-double-angle-right"></i>{{'scheduleJobManage'|translate}}
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+            <!-- /.nav-list -->
+
+            <div class="sidebar-collapse" id="sidebar-collapse">
+                <i class="icon-double-angle-left" data-icon1="icon-double-angle-left"
+                   data-icon2="icon-double-angle-right"></i>
+            </div>
+        </div>
+        <div class="main-content">
+            <div ng-view></div>
+        </div>
+    </div>
+
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse ">
+        <i class="icon-double-angle-up icon-only bigger-110 "></i>
+    </a>
+</div>
+<!--publish confirm -->
+<div class="col-sm-6 ">
+    <div id="dialog-publish-confirm" class="hide ">
+        <p class="bigger-110 bolder center grey btn-fsw-mes ">
+            {{'surepublish'|translate}}</p>
+    </div>
+</div>
+<div class="col-sm-6 ">
+    <div id="dialog-unpublish-confirm" class="hide ">
+        <p class="bigger-110 bolder center grey btn-fsw-mes ">
+            {{'sureunpublish'|translate}}</p>
+    </div>
+</div>
+
+<!--common delete confirm-->
+<div class="col-sm-6 ">
+    <div id="dialog-delete-confirm" class="hide ">
+        <p class="bigger-110 bolder center grey ">
+            <i class="icon-hand-right blue bigger-120 "></i> {{'areyousure'|translate}}
+        </p>
+    </div>
+</div>
+
+<!-- inline scripts related to this page -->
+<!-- god flower -->
+<div class="loading">
+    <img src="plugin/ace/css/images/loading3.gif" style="margin-top: -50%"/>
+</div>
+</body>
+<script>
+    $(function () {
+        //消除双击页面空白处时产生蓝色选择区域
+        /* $('*').bind("selectstart", function () { return false; });  */
+        setTimeout(function () {
+            var curntUrl = window.location.hash;
+            if (curntUrl == '') {
+                //刚登陆系统时					
+                var dropdown = $("#sidebar ul li a.dropdown-toggle:first");
+                dropdown.click();
+            } else if (curntUrl != null && curntUrl.startWith('#') && curntUrl.length > 1) {
+                $("a").each(function () {
+                    var v = $(this).attr("href");
+                    if (v == undefined || v == '#') {
+                        return true;
+                    }
+                    if (v == curntUrl) {
+                        //地址栏url（hash部分）与菜单href完全匹配
+                        $(this).parents('ul.submenu').parent().children('a').click(); //点击父菜单展开菜单
+                        $(this).click(); //点击子菜单
+                        return false;
+                    } else {
+                        //地址栏url（hash部分）与菜单href不完全匹配：进入菜单的子页面中
+                        //如：#/tvshow/addedit/0与任一个菜单都不能完全匹配,而菜单href为#/tvshow/list/0/null
+                        var tmpUrl = curntUrl.substring(curntUrl.indexOf('/') + 1);
+                        tmpUrl = tmpUrl.substring(0, tmpUrl.indexOf('/')); //tvshow
+                        if (v.indexOf(tmpUrl) > 0) {
+                            $(this).parents('ul.submenu').parent().children('a').click(); //展开父菜单
+                            $(this).parents('li').attr("class", "open");
+                            $(this).closest('li').attr("class", "active");
+                            $(this).parents('ul.submenu').attr("style", "display:block");
+                            return false;
+                        }
+                    }
+                });
+            }
+        }, 500);
+    });
+
+    function setActiveClass(event) {
+        $("#sidebar ul.nav li.active").attr("class", "");
+        $("#sidebar ul.nav li ul.submenu").attr("style", "display:none");
+        $("#sidebar ul.nav li.open").attr("class", "");
+        var item = event.target;
+        $(item).parents('li').attr("class", "open");
+        $(item).closest('li').attr("class", "active");
+        $(item).parents('ul.submenu').attr("style", "display:block");
+        return false;
+    }
+
+    Date.prototype.format = function (fmt) { //author: meizz 
+        var o = {
+            "M+": this.getMonth() + 1, //月份 
+            "d+": this.getDate(), //日 
+            "h+": this.getHours(), //小时 
+            "m+": this.getMinutes(), //分 
+            "s+": this.getSeconds(), //秒 
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度 
+            "S": this.getMilliseconds() //毫秒 
+        };
+        if (/(y+)/.test(fmt)) fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        for (var k in o)
+            if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+        return fmt;
+    };
+    //网页内按下回车触发
+    document.onkeydown = keyDownSearch;
+
+
+    function keyDownSearch(e) {
+        // 兼容FF和IE和Opera    
+        var theEvent = e || window.event;
+        var code = theEvent.keyCode || theEvent.which || theEvent.charCode;
+        if (code == 13) {
+            var search = document.getElementById('search')
+            if (search != undefined && search != "" && search != null) {
+                search.click(); //具体处理函数
+                return false;
+            }
+        }
+        return true;
+    }
+
+    String.prototype.startWith = function (str) {
+        if (str == null || str == "" || this.length == 0 || str.length > this.length) return false;
+        if (this.substr(0, str.length) == str) return true;
+        else return false;
+        return true;
+    }
+    String.prototype.endWith = function (str) {
+        if (str == null || str == "" || this.length == 0 || str.length > this.length) return false;
+        if (this.substring(this.length - str.length) == str) return true;
+        else return false;
+        return true;
+    }
+</script>
+
+</html>

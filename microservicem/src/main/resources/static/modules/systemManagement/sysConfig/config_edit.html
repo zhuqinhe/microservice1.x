@@ -1,0 +1,128 @@
+<div class="breadcrumbs" id="breadcrumbs">
+	<script type="text/javascript">
+		try {
+			ace.settings.check('breadcrumbs', 'fixed')
+		} catch (e) {
+		}
+	</script>
+
+	<ul class="breadcrumb">
+		<li><a href="#/sys/sysconfig/list/0">{{'sysConfig'|translate}}</a></li>
+		<li><a ng-if="manFlag=='2'||null==manFlag||''==manFlag" href="#/sys/sysconfig/list/2">{{'systemParam'|translate}}</a>
+			<a ng-if="manFlag=='3'" href="#/sys/sysconfig/list/3">{{'systemConstant'|translate}}</a>
+		</li>
+		<li class="active">{{'edit'|translate}}</li>
+	</ul>
+</div>
+<link href="sysConfig/js/s.css" type="text/css" rel="stylesheet"></link>
+<div class="page-content">
+	<div class="col-sm-12">
+		<form class="form-horizontal" role="form" name="add_form">
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right">{{'configKey'|translate}}<font
+					color="red">*</font>:
+				</label>
+				<div class="col-sm-8">
+					<input class="form-control input-search" type="text"
+						ng-model="data.key" required="required" readonly disabled/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right">{{'configName'|translate}}:</label>
+				<div class="col-sm-8">
+					<input class="form-control input-search" type="text"
+						ng-model="data.name"/>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right">{{'description'|translate}}:</label>
+				<div class="col-sm-8">
+				 <textarea  class="form-control limited textarea-add"
+						rows="3" style="height: 100% !important"
+						 ng-model="data.desc">
+  					</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right">{{'enable'|translate}}:</label>
+				<div class="col-sm-8">
+					<input type="checkbox" ng-checked="data.enable"
+						ng-model="data.enable" id="enableChckbox" ng-click="!data.enable;"
+						class="ace ace-switch ace-switch-5" /><span class="lbl"></span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right">{{'configContent'|translate}}:</label>
+				<!--<div class="col-sm-1" ng-show="false">
+					<input type="text" name="values" ng-model="values"
+						class="form-control input-search" maxlength="255" />
+				</div>  -->
+				<div class="col-sm-8">
+					<textarea  class="form-control limited textarea-add"
+						rows="8" style="height: 100% !important"
+						 ng-model="data.value">
+  					</textarea>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right"></label>
+				<div id="ControlsRow" class="col-sm-8">
+					<input type="Button" class="btn blue" value="{{'formatJson'|translate}}" ng-click="Process()" /> <span
+						id="TabSizeHolder"> {{'indent'|translate}} <select id="TabSize"
+						ngChange="TabSizeChanged()">
+							<option value="1">1</option>
+							<option value="2" selected="true">2</option>
+							<option value="3">3</option>
+							<option value="4">4</option>
+							<option value="5">5</option>
+							<option value="6">6</option>
+					</select>
+					</span> <label for="QuoteKeys"> <input type="checkbox"
+						id="QuoteKeys" ng-click="QuoteKeysClicked()" checked="true" /> {{'quotes'|translate}}
+					</label>&nbsp; <a href="javascript:void(0);" ng-click="SelectAllClicked()">{{'selectAll'|translate}}</a>
+					&nbsp; <span id="CollapsibleViewHolder"> <label
+						for="CollapsibleView"> <input type="checkbox"
+							id="CollapsibleView" ng-click="CollapsibleViewClicked()"
+							checked="true" /> {{'displayControl'|translate}}
+					</label>
+					</span> <span id="CollapsibleViewDetail"> <a
+						href="javascript:void(0);" ng-click="ExpandAllClicked()">{{'expand'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseAllClicked()">{{'collapse'|translate}}</a>
+						<a href="javascript:void(0);" ng-click="CollapseLevel(3)">2{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(4)">3{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(5)">4{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(6)">5{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(7)">6{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(8)">7{{'level'|translate}}</a> <a
+						href="javascript:void(0);" ng-click="CollapseLevel(9)">8{{'level'|translate}}</a>
+					</span>
+				</div>
+			</div>
+			<div class="form-group">
+				<label class="col-sm-2 control-label no-padding-right"></label>
+				<div class="col-sm-8">
+					<div id="Canvas" class="Canvas"></div>
+				</div>
+			</div>
+		</form>
+
+		<div class="clearfix form-actions fsw-form-actions">
+			<div style="text-align: center;">
+				<button class="btn btn-success btn-tool btn-fon" type="button"
+					ng-click="saveValue()" ng-disabled="add_form.$invalid">
+					<i class="icon-ok bigger-110"></i> {{'submit'|translate}}
+				</button>
+				&nbsp; &nbsp; &nbsp; 
+				
+				<a ng-if="manFlag=='2'||null==manFlag||''==manFlag" class="btn btn-default btn-tool btn-fon"
+					type="reset" href="#/sys/sysconfig/list/2"> <i
+					class="icon-undo bigger-110"></i> {{'return'|translate}}
+				</a>
+				<a ng-if="manFlag=='3'" class="btn btn-default btn-tool btn-fon"
+					type="reset" href="#/sys/sysconfig/list/3"> <i
+					class="icon-undo bigger-110"></i> {{'return'|translate}}
+				</a>
+			</div>
+		</div>
+	</div>
+</div>
