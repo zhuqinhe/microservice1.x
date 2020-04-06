@@ -15,13 +15,14 @@
 		<module>microservice-bookmark</module>
 		<module>microservice-comment</module>
 	    <module>microservice-reminder</module>
-		<module>microservice-udcm</module>
+		<module>microservicem</module>
 		<module>microservice-sync-data</module>
-		<module>zmicroservice-hystrix-dashboard</module>
+		<module>microservice-hystrix-dashboard</module>
 		<module>microservice-turbine</module>
 		<module>microservice-metadata</module>
 		<module>microservice-search</module>
 		<module>microservice-config-server</module>
+		<module>microservice-zuul</module>
 	</modules>
 	
 	<properties>
