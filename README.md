@@ -1,3 +1,4 @@
+基于SpringBoot1.x & SpringCloud Edgware.RELEASE 版本 & mangodb & mysql & rabbitmq & kafka.10
 microservice-bookmark: 书签服务
 microservice-comment : 点评服务
 microservice-metadata：原数据服务
